@@ -5,7 +5,11 @@
   "projects": {
     "cinema-ui": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "styleext": "scss"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -26,7 +30,7 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "./node_modules/alertifyjs/build/css/alertify.min.css",
-              "src/styles.css",
+              "src/styles.scss",
               "./node_modules/bootstrap/dist/css/bootstrap.css"
             ],
             "scripts": [
@@ -96,7 +100,7 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
-              "src/styles.css"
+              "src/styles.scss"
             ],
             "scripts": []
           }

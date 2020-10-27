@@ -1,0 +1,50 @@
+:host {
+  display: block;
+  flex-basis: 80px;
+  flex-shrink: 1;
+  flex-grow: 0;
+}
+
+footer {
+  width: 100%;
+  height: 100%;
+  background-color: orange;
+  color: black;
+  text-align: center;
+
+  svg {
+    path {
+      fill: orange
+    }
+
+  }
+
+  .footer-media-icons {
+    font-size: 2rem;
+  }
+}
+
+.fab {
+  padding: 12.5px;
+  font-size: 30px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+  border-radius: 50%;
+}
+
+i:hover {
+  opacity: 0.7;
+}
+
+.fa-facebook-f {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background-color: #1DA1F2;
+  color: white;
+}

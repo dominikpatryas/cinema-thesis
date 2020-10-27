@@ -9,11 +9,10 @@
   @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
   user: User;
-  @Output() cancelRegister = new EventEmitter();
   constructor(private authService: AuthService, private alertifyService: AlertifyService, private fb: FormBuilder,
               private route: Router) { }
   registerForm: FormGroup;
@@ -35,7 +34,7 @@ export class RegisterComponent implements OnInit {
       dateOfBirth: [null, Validators.required],
       city: ['', Validators.required],
       country: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]],
+      password: ['', [Validators.required]],
       confirmPassword: ['', Validators.required]
     }, {validator: this.passwordMatchValidator});
   }
@@ -48,7 +47,7 @@ export class RegisterComponent implements OnInit {
       }, error => {
         this.alertifyService.error(error);
       }, () => {
-        this.authService.login(this.user).subscribe(() => {
+        this.authService.logIn(this.user).subscribe(() => {
           this.route.navigate(['/']);
         });
       });

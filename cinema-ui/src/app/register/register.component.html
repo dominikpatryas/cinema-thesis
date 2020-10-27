@@ -1,3 +1,4 @@
+<div class="container">
 <form [formGroup]="registerForm" (ngSubmit) = "register()">
   <h2 class="text-center text-primary">Sign Up</h2>
   <hr>
@@ -16,7 +17,7 @@
            [ngClass]="{'is-invalid': registerForm.get('email').errors
     && registerForm.get('email').touched}"
     >
-    <div class="invalid-feedback">Please choose a username.</div>
+    <div class="invalid-feedback">Please choose an email.</div>
   </div>
 
   <div class="form-group">
@@ -86,3 +87,4 @@
 
 <p>{{registerForm.value | json}}</p>
 <p>{{registerForm.status | json}}</p>
+</div>
