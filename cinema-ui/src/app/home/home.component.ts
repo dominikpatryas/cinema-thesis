@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {environment} from '../../environments/environment';
+import {Movie} from '../_models/Movie';
+import {HttpClient} from '@angular/common/http';
+import {MoviesService} from '../_services/movies.service';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +10,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  movies: Movie[];
+  constructor(private http: HttpClient, private moviesService: MoviesService) { }
 
   ngOnInit(): void {
+    this.moviesService.getMovies().subscribe(movies => {
+      this.movies = movies;
+    });
   }
 
 }
