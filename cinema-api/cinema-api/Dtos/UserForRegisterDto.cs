@@ -9,13 +9,14 @@ namespace cinema_api.Dtos
     public class UserForRegisterDto
     {
         [Required]
-        public string Username { get; set; }
-
+        public string Email { get; set; }
+        [Required]
+        public string FirstName { get; set; }
+        [Required]
+        public string LastName { get; set; }
         [Required]
         [StringLength(32, MinimumLength = 4, ErrorMessage = "You must choose password between 4 and 32 characters.")]
         public string Password { get; set; }
-        [Required]
-        public string Gender { get; set; }
         [Required]
         public string City { get; set; }
         [Required]
