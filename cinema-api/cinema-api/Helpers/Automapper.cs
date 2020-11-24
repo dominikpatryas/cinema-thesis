@@ -13,6 +13,9 @@ namespace cinema_api.Helpers
         public Automapper()
         {
             CreateMap<UserForRegisterDto, User>();
+            CreateMap<MovieForAdd, Movie>();
+            CreateMap<PhotoForAdd, Photo>();
+
         }
     }
 }
