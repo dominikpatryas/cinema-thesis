@@ -79,6 +79,9 @@ namespace cinema_api.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<bool>("Admin")
+                        .HasColumnType("bit");
+
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
@@ -96,6 +99,9 @@ namespace cinema_api.Migrations
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("MasterAdmin")
+                        .HasColumnType("bit");
 
                     b.Property<byte[]>("PasswordHash")
                         .HasColumnType("varbinary(max)");

@@ -265,5 +265,7 @@ X:\Studia\Programowanie\cinema-app\cinema-api\cinema-api\bin\Debug\netcoreapp3.1
 X:\Studia\Programowanie\cinema-app\cinema-api\cinema-api\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
 X:\Studia\Programowanie\cinema-app\cinema-api\cinema-api\bin\Debug\netcoreapp3.1\System.Web.Http.dll
 X:\Studia\Programowanie\cinema-app\cinema-api\cinema-api\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+X:\Studia\Programowanie\cinema-app\cinema-api\cinema-api\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+X:\Studia\Programowanie\cinema-app\cinema-api\cinema-api\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 X:\Studia\Programowanie\cinema-app\cinema-api\cinema-api\obj\Debug\netcoreapp3.1\cinema-api.csproj.CoreCompileInputs.cache
 X:\Studia\Programowanie\cinema-app\cinema-api\cinema-api\obj\Debug\netcoreapp3.1\cinema-api.MvcApplicationPartsAssemblyInfo.cache

@@ -1,5 +1,8 @@
 ﻿using cinema_api.Dtos;
 using cinema_api.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace cinema_api.Data
@@ -22,19 +25,23 @@ namespace cinema_api.Data
             throw new System.NotImplementedException();
         }
 
-        public Task<Movie> GetMovie(int id)
+        public async Task<Movie> GetMovie(int id)
         {
-            throw new System.NotImplementedException();
+            var movie = await _context.Movies.Include(x => x.Photos).FirstOrDefaultAsync(x => x.Id == id);
+
+            return movie;
         }
 
-        public Task<Movie> GetMovies()
+        public async Task<IEnumerable<Movie>> GetMovies()
         {
-            throw new System.NotImplementedException();
+            var movies = await _context.Movies.Include(x => x.Photos).ToListAsync();
+            
+            return movies;
         }
 
-        public Task<bool> IsMovieExisting(string name)
+        public bool IsMovieExisting(string name)
         {
-            throw new System.NotImplementedException();
+             return _context.Movies.Any(x => x.Title == name);
         }
 
         public async Task<bool> SaveAll()

@@ -16,5 +16,7 @@ namespace cinema_api.Models
         public DateTime DateOfBirth { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        public bool Admin { get; set; }
+        public bool MasterAdmin { get; set; }
     }
 }

@@ -36,7 +36,9 @@ namespace cinema_api
             services.AddAuthorization();
             services.AddMvc();
             services.AddCors();
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IMoviesRepository, MoviesRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
