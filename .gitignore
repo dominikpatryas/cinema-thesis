@@ -3,3 +3,5 @@
 .sln
 
 node_modules
+Migrations
+.idea

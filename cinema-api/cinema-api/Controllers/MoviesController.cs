@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 using AutoMapper;
 using cinema_api.Data;
 using cinema_api.Dtos;
+using cinema_api.Helpers;
+using cinema_api.Helpers.Interfaces;
 using cinema_api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,16 +20,21 @@ namespace cinema_api.Controllers
     {
         private IMoviesRepository _repo;
         private readonly IMapper _mapper;
-        
-        public MoviesController(IMoviesRepository repo, IMapper mapper)
+        private IAuthorizer _authorizer;
+
+        public MoviesController(IMoviesRepository repo, IMapper mapper, IAuthorizer authorizer)
         {
             _repo = repo;
             _mapper = mapper;
+            _authorizer = authorizer;
         }
-
-        [HttpPost("add")]
+        [Authorize]
+        [HttpPost]
         public async Task<IActionResult> AddMovie(MovieForAddDto movieForAdd)
         {
+            if (!_authorizer.IsAdminOrEmployee(User))
+                return Unauthorized();
+
             foreach (var entry in movieForAdd.Photos)
             {
                 entry.MovieTitle = movieForAdd.Title;
@@ -56,12 +64,16 @@ namespace cinema_api.Controllers
             return StatusCode(200, movie);
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateMovie(int id, MovieForUpdateDto movieForUpdate)
         {
-            var movieFromrepo = await _repo.GetMovie(id);
+            if (!_authorizer.IsAdminOrEmployee(User))
+                return Unauthorized();
 
-            _mapper.Map(movieForUpdate, movieFromrepo);
+            var movieFromRepository = await _repo.GetMovie(id);
+
+            _mapper.Map(movieForUpdate, movieFromRepository);
 
             if (await _repo.SaveAll())
                 return NoContent();
@@ -69,9 +81,13 @@ namespace cinema_api.Controllers
             throw new Exception($"Updating user {id} failed on save");
         }
 
+        [Authorize]
         [HttpGet("exists/{title}")]
         public async Task<IActionResult> IsMovieExisting(string title)
         {
+            if (!_authorizer.IsAdminOrEmployee(User))
+                return Unauthorized();
+
             var isExisting = _repo.IsMovieExisting(title);
 
             return StatusCode(200, isExisting);

@@ -1,0 +1,57 @@
+<div class="container">
+  <h1 class="my-4">Movie
+    <small>{{movie?.title}} </small>
+  </h1>
+  <div class="movie d-flex" style="background-color: red">
+    <img class="img-fluid w-50 h-100" src="{{movie?.photos[0].url}}">
+    <div class="movie-descrition m-3">
+      <h2>Description:</h2>
+      <p class="movie-text">
+        {{movie?.description}} Sed mauris velit, mollis vel dictum eget, dignissim tempor massa. In tempor commodo
+        libero, ut pulvinar neque. Integer ac quam porttitor, dignissim lorem faucibus, finibus metus. Mauris quis
+        fringilla metus, ac blandit risus. Mauris at sagittis velit. Vestibulum id facilisis lorem. Nulla enim tellus,
+        vulputate non metus at, consectetur dignissim risus. Etiam dapibus vitae leo vel volutpat. Maecenas consequat
+        dapibus sagittis. Duis nec accumsan lorem, ac dictum ipsum. Nunc et dolor in mi aliquam dignissim. Curabitur
+        tellus odio, egestas eu cursus sit amet, ultricies tincidunt augue. Sed ultrices mollis nisi, non accumsan nisi
+        consequat ac. In condimentum diam a tortor dignissim, sit amet fermentum metus sollicitudin.
+      </p>
+      <div class="cast">
+        <h2>Cast</h2>
+        <p class="cast-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec bibendum feugiat purus eu
+          blandit</p>
+        <div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <h1>Do you want to reserve ticket?</h1>
+
+  <table mat-table [dataSource]="shows" class="mat-elevation-z8 w-100 my-5">
+    <ng-container matColumnDef="Datetime of show">
+      <th mat-header-cell *matHeaderCellDef> Datetime of show </th>
+      <td mat-cell *matCellDef="let element"> {{dateService.convertDatetoView(element.datePlayed)}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Available seats">
+      <th mat-header-cell *matHeaderCellDef> Available seats </th>
+      <td mat-cell *matCellDef="let element"> {{element.hall.seatNumbers - element.seatsReserved?.length}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Reservation">
+      <th mat-header-cell *matHeaderCellDef> Reservation </th>
+      <td mat-cell *matCellDef="let element"> <button class="btn-primary" (click)="getShow(element.id); setVisibilityOfReservation(true)"> Reservate</button> </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <h1 class="text-center">EKRAN</h1>
+  <hr class="w-75 text-center" style="height: 2px; background-color:black">
+  <div class=" w-75">
+    <div id="reservationField" class="text-center" *ngIf="isReservationVisible">
+      <button class="m-1" style="background-color: gray; width: 50px; height: 50px;" *ngFor="let seat of [].constructor(show?.hall.seatNumbers); let i = index"> {{i}}</button>
+    </div>
+  </div>
+
+
+</div>

@@ -5,7 +5,5 @@ export interface Movie {
   title: string;
   description: string;
   trailerUrl: string;
-  datePlayed: Date;
   photos: Photo[];
-  mainPhoto: Photo;
 }

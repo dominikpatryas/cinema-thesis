@@ -5,6 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using cinema_api.Data;
+using cinema_api.Data.Interfaces;
+using cinema_api.Data.Repositories;
+using cinema_api.Helpers;
+using cinema_api.Helpers.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,13 +45,17 @@ namespace cinema_api
             );
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IMoviesRepository, MoviesRepository>();
+            services.AddScoped<IHallsRepository, HallsRepository>();
+            services.AddScoped<IShowsRepository, ShowsRepository>();
+            services.AddScoped<IAuthorizer, Authorizer>();
+            services.AddScoped<IReservationsRepository, ReservationsRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddJwtBearer(options => {
                         options.TokenValidationParameters = new TokenValidationParameters
                         {
                             ValidateIssuerSigningKey = true,
                             IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
-                                            .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
+                                            .GetBytes(Configuration.GetSection("Token").Value)),
                             ValidateIssuer = false,
                             ValidateAudience = false
                         };
@@ -71,6 +79,7 @@ namespace cinema_api
 
             app.UseRouting();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

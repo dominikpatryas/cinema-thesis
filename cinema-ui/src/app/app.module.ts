@@ -15,6 +15,9 @@ import {appRoutes} from './routes';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { PriceListComponent } from './price-list/price-list.component';
 import { ContactComponent } from './contact/contact.component';
+import { MovieComponent } from './movie/movie.component';
+import {MatTableModule} from "@angular/material/table";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -26,16 +29,18 @@ import { ContactComponent } from './contact/contact.component';
     RegisterComponent,
     NavigationComponent,
     PriceListComponent,
-    ContactComponent
+    ContactComponent,
+    MovieComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgbModule,
-    RouterModule.forRoot(appRoutes)
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgbModule,
+        RouterModule.forRoot(appRoutes),
+        MatTableModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

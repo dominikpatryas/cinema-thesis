@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace cinema_api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -40,18 +40,19 @@ namespace cinema_api.Controllers
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
-                new Claim(ClaimTypes.Name, userFromRepo.Email)
-
+                new Claim(ClaimTypes.Email, userFromRepo.Email.ToString()),
+                new Claim("Admin", userFromRepo.Admin.ToString(), ClaimValueTypes.Boolean),
+                new Claim("Employee", userFromRepo.Employee.ToString(), ClaimValueTypes.Boolean)
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("Token").Value));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(1),
+                Expires = DateTime.Now.AddDays(365),
                 SigningCredentials = creds
             };
 

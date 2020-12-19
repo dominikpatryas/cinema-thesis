@@ -10,6 +10,5 @@ namespace cinema_api.Models
         public bool IsMain { get; set; }
         public string MovieTitle { get; set; }
         public int MovieId { get; set; }
-        public Movie Movie { get; set; }
     }
 }

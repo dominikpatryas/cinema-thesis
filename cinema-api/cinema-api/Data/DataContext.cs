@@ -1,4 +1,5 @@
 ﻿using cinema_api.Models;
+using cinema_api.Models.HelperModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,12 @@ namespace cinema_api.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<Photo> Photos { get; set; }
+        public DbSet<Show> Shows { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<Hall> Halls{ get; set; }
+        public DbSet<Seat> Seats{ get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<SeatReserved> SeatReserved { get; set; }
+        public DbSet<Cast> Cast { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using cinema_api.Models.HelperModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,9 @@ namespace cinema_api.Models
         public DateTime DateOfBirth { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        public bool Employee { get; set; }
         public bool Admin { get; set; }
-        public bool MasterAdmin { get; set; }
+        public List<Reservation> Reservations { get; set; }
+        public List<Ticket> Ticket { get; set; }
     }
 }
