@@ -15,8 +15,10 @@ export class MovieComponent implements OnInit {
   movie: Movie;
   shows: any[];
   show: any;
+  seatsToBeReserved = [];
   isReservationVisible = false;
   displayedColumns: string[] = ['Datetime of show', 'Available seats', 'Reservation'];
+
   constructor(private moviesService: MoviesService,
               private route: ActivatedRoute,
               private alertify: AlertifyService,
@@ -57,5 +59,24 @@ export class MovieComponent implements OnInit {
     }, error => {
       this.alertify.error('Error in loading show');
     });
+  }
+
+  chooseSeat(seatNumber) {
+    if (this.seatsToBeReserved.includes(seatNumber)) {
+      this.removeSeat(seatNumber)
+    } else {
+      this.seatsToBeReserved.push(seatNumber);
+    }
+
+    console.log(this.seatsToBeReserved);
+  }
+
+  removeSeat(seatNumber) {
+    const indexOfSeat = this.seatsToBeReserved.indexOf(seatNumber);
+
+    if (indexOfSeat > -1){
+      this.seatsToBeReserved.splice(indexOfSeat, 1);
+    }
+    console.log(this.seatsToBeReserved)
   }
 }

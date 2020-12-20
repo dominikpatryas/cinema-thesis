@@ -14,17 +14,17 @@
         <ul class="list-unstyled">
           <li>
             <p>
-              <a href="/price-list">PRICE LIST</a>
+              <a routerLink="/price-list">PRICE LIST</a>
             </p>
           </li>
           <li>
             <p>
-              <a href="/gallery">GALLERY</a>
+              <a routerLink="/gallery">GALLERY</a>
             </p>
           </li>
           <li>
             <p>
-              <a href="/privacy-policy">PRIVACY POLICY</a>
+              <a routerLink="/privacy-policy">PRIVACY POLICY</a>
             </p>
           </li>
         </ul>
@@ -64,8 +64,8 @@
     </div>
   </div>
 
-  <div class="footer-copyright text-center py-3">© 2020 Wszelkie prawa zastrzeżone:
-    <a href="/"> Cinema</a>
+  <div class="footer-copyright text-center py-3" *ngIf="x()">© 2020 Wszelkie prawa zastrzeżone:
+    <a routerLink="/"> Cinema</a>
   </div>
 
 </footer>

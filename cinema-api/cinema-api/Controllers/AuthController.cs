@@ -41,6 +41,7 @@ namespace cinema_api.Controllers
             {
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
                 new Claim(ClaimTypes.Email, userFromRepo.Email.ToString()),
+                new Claim(ClaimTypes.Name, userFromRepo.FirstName.ToString()),
                 new Claim("Admin", userFromRepo.Admin.ToString(), ClaimValueTypes.Boolean),
                 new Claim("Employee", userFromRepo.Employee.ToString(), ClaimValueTypes.Boolean)
             };

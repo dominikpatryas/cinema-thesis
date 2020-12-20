@@ -12,7 +12,7 @@ import {UserForLogin} from '../_models/UserForLogin';
 })
 export class NavigationComponent implements OnInit {
   user: UserForLogin;
-  constructor(private authService: AuthService, private alertifyService: AlertifyService, private fb: FormBuilder,
+  constructor(public authService: AuthService, private alertifyService: AlertifyService, private fb: FormBuilder,
               private route: Router) { }
   loginForm: FormGroup;
 
@@ -41,5 +41,9 @@ export class NavigationComponent implements OnInit {
         });
       });
     }
+  }
+
+  isLoggedIn() {
+    return this.authService.isLoggedIn();
   }
 }
