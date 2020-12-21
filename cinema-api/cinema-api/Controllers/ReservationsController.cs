@@ -31,6 +31,11 @@ namespace cinema_api.Controllers
         {
             var reservation = _mapper.Map<Reservation>(reservationForAdd);
 
+            foreach (var seat in reservationForAdd.SeatsReserved)
+            {
+                seat.ShowId = reservationForAdd.ShowId;
+            }
+
             _repo.AddReservation(reservation);
             await _repo.SaveAll();
 

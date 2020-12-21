@@ -1,4 +1,5 @@
-﻿using cinema_api.Models.HelperModels;
+﻿using cinema_api.Models;
+using cinema_api.Models.HelperModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace cinema_api.Dtos.Reservations
     {
         public int UserId { get; set; }
         public int ShowId { get; set; }
-        public List<Seat> SeatsReserved { get; set; }
+        public List<SeatReserved> SeatsReserved { get; set; }
         public int isConfirmed { get; set; }
     }
 }

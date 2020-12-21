@@ -10,8 +10,11 @@ namespace cinema_api.Models.HelperModels
     {
         public int Id { get; set; }
         public TicketType TicketType { get; set; }
-        public List<Seat> Seats { get; set; }
+        public List<SeatReserved> SeatsReserved { get; set; }
         public int UserId { get; set; }
+        public int ShowId { get; set; }
+        public Show Show { get; set; }
+        public int ReservationId { get; set; }
     }
 }
 

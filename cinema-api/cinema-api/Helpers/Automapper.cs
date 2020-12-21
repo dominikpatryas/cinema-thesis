@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using cinema_api.Dtos;
+using cinema_api.Dtos.Casts;
 using cinema_api.Dtos.Halls;
 using cinema_api.Dtos.Reservations;
 using cinema_api.Dtos.Shows;
@@ -20,6 +21,7 @@ namespace cinema_api.Helpers
             CreateMap<ShowForAddDto, Show>();
             CreateMap<PhotoForAddDto, Photo>();
             CreateMap<HallForAddDto, Hall>();
+            CreateMap<CastForAddDto, Cast>();
             CreateMap<ReservationForAddDto, Reservation>();
             CreateMap<MovieForUpdateDto, Movie>();
         }

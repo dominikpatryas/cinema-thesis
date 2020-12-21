@@ -20,7 +20,7 @@ namespace cinema_api.Data
         public DbSet<Hall> Halls{ get; set; }
         public DbSet<Seat> Seats{ get; set; }
         public DbSet<Ticket> Tickets { get; set; }
-        public DbSet<SeatReserved> SeatReserved { get; set; }
-        public DbSet<Cast> Cast { get; set; }
+        public DbSet<SeatReserved> SeatsReserved { get; set; }
+        public DbSet<Cast> Casts { get; set; }
     }
 }

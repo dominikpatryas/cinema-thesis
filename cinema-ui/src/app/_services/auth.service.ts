@@ -37,7 +37,6 @@ export class AuthService {
     if (token) {
       this.dekodedToken = this.jwtHelper.decodeToken(token);
     }
-    console.log(this.dekodedToken)
     return !this.jwtHelper.isTokenExpired(token);
   }
 }

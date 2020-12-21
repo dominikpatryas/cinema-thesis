@@ -1,4 +1,5 @@
 import {Photo} from './Photo';
+import {Cast} from './Cast';
 
 export interface Movie {
   id: number;
@@ -6,4 +7,5 @@ export interface Movie {
   description: string;
   trailerUrl: string;
   photos: Photo[];
+  casts: Cast[];
 }

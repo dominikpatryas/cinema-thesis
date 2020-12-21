@@ -27,14 +27,20 @@ namespace cinema_api.Data
 
         public async Task<Movie> GetMovie(int id)
         {
-            var movie = await _context.Movies.Include(x => x.Photos).FirstOrDefaultAsync(x => x.Id == id);
+            var movie = await _context.Movies
+                .Include(x => x.Photos)
+                .Include(x => x.Casts)
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             return movie;
         }
 
         public async Task<IEnumerable<Movie>> GetMovies()
         {
-            var movies = await _context.Movies.Include(x => x.Photos).ToListAsync();
+            var movies = await _context.Movies
+                .Include(x => x.Photos)
+                .Include(x => x.Casts)
+                .ToListAsync();
             
             return movies;
         }
