@@ -91,11 +91,11 @@ export class MovieComponent implements OnInit {
   }
 
   chooseSeat(seatNumber) {
-    if (this.seatsToBeReserved.includes(seatNumber)) {
-      this.removeSeat(seatNumber);
-    } else {
-      this.seatsToBeReserved.push(seatNumber);
+    if (this.seatsReserved.includes(seatNumber)) {
+      return;
     }
+
+    this.seatsToBeReserved.includes(seatNumber) ? this.removeSeat(seatNumber) : this.seatsToBeReserved.push(seatNumber);
 
     console.log(this.seatsToBeReserved);
   }
