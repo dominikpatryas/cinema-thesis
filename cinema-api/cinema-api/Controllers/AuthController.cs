@@ -78,7 +78,14 @@ namespace cinema_api.Controllers
             var userToCreate = _mapper.Map<User>(userForRegisterDto);
             var createdUser = await _repo.Register(userToCreate, userForRegisterDto.Password);
 
-            return StatusCode(201);
+            if (userForRegisterDto.TemporaryReservation)
+            {
+                return StatusCode(201, createdUser.Id);
+            } 
+            else
+            {
+                return StatusCode(201);
+            }
         }
     }
 }

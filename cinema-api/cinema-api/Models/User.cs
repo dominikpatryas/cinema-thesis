@@ -19,6 +19,7 @@ namespace cinema_api.Models
         public string Country { get; set; }
         public bool Employee { get; set; }
         public bool Admin { get; set; }
+        public bool TemporaryReservation { get; set; }
         public List<Reservation> Reservations { get; set; }
         public List<Ticket> Ticket { get; set; }
     }

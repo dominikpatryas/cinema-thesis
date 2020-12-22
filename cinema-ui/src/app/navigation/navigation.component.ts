@@ -12,7 +12,9 @@ import {UserForLogin} from '../_models/UserForLogin';
 })
 export class NavigationComponent implements OnInit {
   user: UserForLogin;
-  constructor(public authService: AuthService, private alertifyService: AlertifyService, private fb: FormBuilder,
+  constructor(public authService: AuthService,
+              private alertifyService: AlertifyService,
+              private fb: FormBuilder,
               private route: Router) { }
   loginForm: FormGroup;
 
@@ -34,13 +36,22 @@ export class NavigationComponent implements OnInit {
       this.authService.logIn(this.user).subscribe(() => {
         this.alertifyService.success('Login successful');
       }, error => {
-        this.alertifyService.error(error);
+        this.alertifyService.error('Failed to log in');
       }, () => {
         this.authService.logIn(this.user).subscribe(() => {
           this.route.navigate(['/']);
         });
       });
     }
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    this.authService.dekodedToken = null;
+
+    this.alertifyService.message('Logged out!');
+    this.route.navigate(['/']);
   }
 
   isLoggedIn() {

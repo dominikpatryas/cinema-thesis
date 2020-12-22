@@ -5,15 +5,20 @@ import {ActivatedRoute} from '@angular/router';
 import {AlertifyService} from '../_services/alertify.service';
 import {ShowsService} from '../_services/shows.service';
 import {DateService} from '../_services/date.service';
-import {ReservationsService} from "../_services/reservations.service";
-import {AuthService} from "../_services/auth.service";
-
+import {ReservationsService} from '../_services/reservations.service';
+import {AuthService} from '../_services/auth.service';
+import {faCalendarAlt} from '@fortawesome/free-solid-svg-icons';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import * as uuid from 'uuid';
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
   styleUrls: ['./movie.component.scss']
 })
 export class MovieComponent implements OnInit {
+  // icons
+  faCalendarAlt = faCalendarAlt;
+
   movie: Movie;
   shows: any[];
   show: any;
@@ -21,6 +26,8 @@ export class MovieComponent implements OnInit {
   seatsReserved = [];
   isReservationVisible = false;
   displayedColumns: string[] = ['Datetime of show', 'Available seats', 'Reservation'];
+  reservationForm: FormGroup;
+  isUserLogged = false;
 
   constructor(private moviesService: MoviesService,
               private route: ActivatedRoute,
@@ -28,10 +35,17 @@ export class MovieComponent implements OnInit {
               private showsService: ShowsService,
               private authService: AuthService,
               private reservationsService: ReservationsService,
-              public dateService: DateService) { }
+              public dateService: DateService,
+              private formBuilder: FormBuilder) {
+  }
 
   ngOnInit(): void {
     this.loadMovie();
+    this.createReservationForm();
+
+    if (this.authService.dekodedToken) {
+      this.isUserLogged = true;
+    }
   }
 
   loadMovie() {
@@ -89,18 +103,22 @@ export class MovieComponent implements OnInit {
   removeSeat(seatNumber) {
     const indexOfSeat = this.seatsToBeReserved.indexOf(seatNumber);
 
-    if (indexOfSeat > -1){
+    if (indexOfSeat > -1) {
       this.seatsToBeReserved.splice(indexOfSeat, 1);
     }
   }
 
-  createReservation() {
+  createReservation(userId?) {
     if (this.seatsToBeReserved.length) {
       this.seatsToBeReserved.forEach((seat, i) => {
-        this.seatsToBeReserved[i] = { seatNumber: seat };
+        this.seatsToBeReserved[i] = {seatNumber: seat};
       });
 
-      this.reservationsService.addReservation(Number(this.authService.dekodedToken.nameid), this.show.id, this.seatsToBeReserved).subscribe(res => {
+      if (!userId) {
+        userId = Number(this.authService.dekodedToken?.nameid);
+      }
+
+      this.reservationsService.addReservation(userId, this.show.id, this.seatsToBeReserved).subscribe(res => {
         this.seatsToBeReserved.forEach(seatToBeReserved => {
           this.seatsReserved.push(seatToBeReserved.seatNumber);
         });
@@ -110,6 +128,33 @@ export class MovieComponent implements OnInit {
       }, (error) => {
         console.log(error);
         this.alertify.error(`Failed reservation for ${this.movie.title}`);
+      });
+    }
+  }
+
+  createReservationForm() {
+    this.reservationForm = this.formBuilder.group({
+      email: ['', Validators.required],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      dateOfBirth: [null, Validators.required],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
+    });
+  }
+
+  createReservationWithoutAccount() {
+    if (this.reservationForm.valid) {
+      const reservationUser = Object.assign({}, this.reservationForm.value);
+
+      reservationUser.password = uuid.v4();
+      reservationUser.temporaryReservation = true;
+      this.authService.register(reservationUser).subscribe((createdReservationUserId: any) => {
+
+        this.createReservation(createdReservationUserId);
+        this.alertify.success('Registration successful');
+      }, error => {
+        this.alertify.error(error);
       });
     }
   }

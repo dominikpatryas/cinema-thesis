@@ -25,7 +25,6 @@ namespace cinema_api.Controllers
             _mapper = mapper;
         }
 
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> AddReservation(ReservationForAddDto reservationForAdd)
         {
@@ -42,7 +41,6 @@ namespace cinema_api.Controllers
             return StatusCode(201);
         }
 
-        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetReservations()
         {
@@ -51,7 +49,6 @@ namespace cinema_api.Controllers
             return StatusCode(200, reservations);
         }
 
-        [Authorize]
         [HttpGet("{reservationId}")]
         public async Task<IActionResult> GetReservation(int reservationId)
         {

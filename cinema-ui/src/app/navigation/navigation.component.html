@@ -41,17 +41,15 @@
               </form>
               <div class="dropdown-divider"></div>
               <button ngbDropdownItem routerLink="/register">New around here? Sign up</button>
-              <button ngbDropdownItem>Forgot password?</button>
             </div>
           </ng-container>
           <ng-container *ngIf="isLoggedIn()">
-            <div class="dropdown" dropdown>
-              <a class="dropdown-toggle " dropdownToggle >
-                Welcome {{authService.dekodedToken?.unique_name | titlecase}}
-              </a>
-              <div class="dropdown-menu mt-3" *dropdownMenu >
-                <div class="dropdown"></div>
-                <a class="dropdown-item" ><i class="fa fa-sign-out"></i> Logout</a>
+            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+              <button class="btn btn-outline-primary mr-2" id="dropdownManual" ngbDropdownAnchor
+                      (focus)="myDrop.open()">Welcome {{authService.dekodedToken?.unique_name | titlecase}}</button>
+              <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                <button ngbDropdownItem>My profile</button>
+                <button ngbDropdownItem (click)="logout()">Logout</button>
               </div>
             </div>
           </ng-container>

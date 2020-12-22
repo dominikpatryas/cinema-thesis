@@ -15,7 +15,6 @@ namespace cinema_api.Dtos
         [Required]
         public string LastName { get; set; }
         [Required]
-        [StringLength(32, MinimumLength = 4, ErrorMessage = "You must choose password between 4 and 32 characters.")]
         public string Password { get; set; }
         [Required]
         public string City { get; set; }
@@ -23,5 +22,6 @@ namespace cinema_api.Dtos
         public string Country { get; set; }
         [Required]
         public DateTime DateOfBirth { get; set; }
+        public bool TemporaryReservation { get; set; }
     }
 }

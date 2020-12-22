@@ -11,7 +11,6 @@ export class ReservationsService {
   constructor(private http: HttpClient) { }
 
   addReservation(userId: number, showId: number, seatsReserved: any[]) {
-    return this.http.post(this.apiUrl, {userId, showId, seatsReserved},
-      {headers: new HttpHeaders('Authorization: Bearer ' + localStorage.getItem('token'))});
+    return this.http.post(this.apiUrl, {userId, showId, seatsReserved});
   }
 }

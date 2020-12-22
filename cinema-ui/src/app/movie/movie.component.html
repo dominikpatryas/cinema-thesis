@@ -6,7 +6,7 @@
     <img class="img-fluid w-50 h-100" src="{{movie?.photos[0].url}}">
     <div class="movie-descrition m-3">
       <h2>Description:</h2>
-      <p class="movie-text">
+      <p class="movie-text"> <
         {{movie?.description}} Sed mauris velit, mollis vel dictum eget, dignissim tempor massa. In tempor commodo
         libero, ut pulvinar neque. Integer ac quam porttitor, dignissim lorem faucibus, finibus metus. Mauris quis
         fringilla metus, ac blandit risus. Mauris at sagittis velit. Vestibulum id facilisis lorem. Nulla enim tellus,
@@ -33,7 +33,7 @@
   <table mat-table [dataSource]="shows" class="mat-elevation-z8 w-100 my-5">
     <ng-container matColumnDef="Datetime of show">
       <th mat-header-cell *matHeaderCellDef> Datetime of show</th>
-      <td mat-cell *matCellDef="let element"> {{dateService.convertDatetoView(element.datePlayed)}} </td>
+      <td mat-cell *matCellDef="let element"><fa-icon [icon]="faCalendarAlt"></fa-icon> {{dateService.convertDatetoView(element.datePlayed)}} </td>
     </ng-container>
 
     <ng-container matColumnDef="Available seats">
@@ -54,12 +54,11 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-
   <ng-container *ngIf="isReservationVisible">
     <h1 class="w-100 text-center">SCREEN</h1>
     <div class="w-75 text-center" style="height: 2px; background-color:black; margin: 0 12.5% 20px 12.5%;"></div>
     <div class="" style="padding: 0 12.5%;">
-      <div id="reservationField" class="text-center">
+      <div id="reservationField" class="grid-container">
         <button class="m-1"
                 style="background-color: gray; width: 50px; height: 50px;"
                 *ngFor="let seat of [].constructor(show?.hall.seatNumbers); let i = index"
@@ -76,7 +75,58 @@
       <h4>Seats choosen:
         <ng-container *ngFor="let seat of seatsToBeReserved"> {{seat}}</ng-container>
       </h4>
-      <button [disabled]="!seatsToBeReserved.length" (click)="createReservation()">Reservate seats</button>
+      <ng-container *ngIf="isReservationVisible">
+        <div *ngIf="!isUserLogged" class="text-center w-50 mx-auto my-0">
+        <form [formGroup]="reservationForm" (ngSubmit) = "createReservationWithoutAccount()">
+          <h2 class="text-center text-primary">Create reservation without account</h2>
+          <hr>
+          <div class="form-group">
+          <div class="form-group" >
+            <input type="email" class="form-control" formControlName="email" placeholder="Email"
+                   [ngClass]="{'is-invalid': reservationForm.get('email').errors
+    && reservationForm.get('email').touched}"
+            >
+            <div class="invalid-feedback">Please choose an email.</div>
+          </div>
+
+          <div class="form-group">
+            <input [ngClass]="{'is-invalid': reservationForm.get('firstName').errors && reservationForm.get('firstName').touched}" class="form-control"
+                   placeholder="First Name" formControlName="firstName">
+            <div class="invalid-feedback" *ngIf="reservationForm.get('firstName').touched && reservationForm.get('firstName').hasError('required')">First Name is required</div>
+          </div>
+
+          <div class="form-group">
+            <input [ngClass]="{'is-invalid': reservationForm.get('lastName').errors && reservationForm.get('lastName').touched}" class="form-control"
+                   placeholder="Last Name" formControlName="lastName">
+            <div class="invalid-feedback" *ngIf="reservationForm.get('lastName').touched && reservationForm.get('lastName').hasError('required')">Last Name is required</div>
+          </div>
+
+          <div class="form-group">
+            <input [ngClass]="{'is-invalid': reservationForm.get('dateOfBirth').errors && reservationForm.get('dateOfBirth').touched}" class="form-control"
+                   placeholder="Date of Birth" formControlName="dateOfBirth" type="date" >
+            <div class="invalid-feedback" *ngIf="reservationForm.get('dateOfBirth').touched && reservationForm.get('dateOfBirth').hasError('required')">Date of Birth is required</div>
+          </div>
+
+          <div class="form-group">
+            <input [ngClass]="{'is-invalid': reservationForm.get('city').errors && reservationForm.get('city').touched}" class="form-control"
+                   placeholder="City" formControlName="city">
+            <div class="invalid-feedback" *ngIf="reservationForm.get('city').touched && reservationForm.get('city').hasError('required')">City is required</div>
+          </div>
+
+          <div class="form-group">
+            <input [ngClass]="{'is-invalid': reservationForm.get('country').errors && reservationForm.get('country').touched}" class="form-control"
+                   placeholder="Country" formControlName="country">
+            <div class="invalid-feedback" *ngIf="reservationForm.get('country').touched && reservationForm.get('country').hasError('required')">Country is required</div>
+          </div>
+
+          <div class="form-group text-center">
+            <button class="btn btn-success" [disabled]="!reservationForm.valid || !seatsToBeReserved.length" type="submit">Reservate seats</button>
+          </div>
+          </div>
+        </form>
+        </div>
+      </ng-container>
+      <button [disabled]="!seatsToBeReserved.length" *ngIf="isUserLogged" (click)="createReservation()">Reservate seats</button>
     </div>
   </ng-container>
 </div>

@@ -16,8 +16,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { PriceListComponent } from './price-list/price-list.component';
 import { ContactComponent } from './contact/contact.component';
 import { MovieComponent } from './movie/movie.component';
-import {MatTableModule} from "@angular/material/table";
-import {CommonModule} from "@angular/common";
+import {MatTableModule} from '@angular/material/table';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -39,7 +39,8 @@ import {CommonModule} from "@angular/common";
         ReactiveFormsModule,
         NgbModule,
         RouterModule.forRoot(appRoutes),
-        MatTableModule
+        MatTableModule,
+        FontAwesomeModule
     ],
   providers: [],
   bootstrap: [AppComponent]
