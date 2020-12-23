@@ -12,14 +12,17 @@ import {UserForLogin} from '../_models/UserForLogin';
 })
 export class NavigationComponent implements OnInit {
   user: UserForLogin;
-  constructor(public authService: AuthService,
+  loginForm: FormGroup;
+
+  constructor(private authService: AuthService,
               private alertifyService: AlertifyService,
               private fb: FormBuilder,
               private route: Router) { }
-  loginForm: FormGroup;
 
   ngOnInit(): void {
     this.createLoginForm();
+
+    console.log(this.getUserDecodedToken());
   }
 
   createLoginForm() {
@@ -45,10 +48,13 @@ export class NavigationComponent implements OnInit {
     }
   }
 
+  getUserDecodedToken() {
+    return this.authService.getDecodedToken();
+  }
+
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    this.authService.dekodedToken = null;
 
     this.alertifyService.message('Logged out!');
     this.route.navigate(['/']);

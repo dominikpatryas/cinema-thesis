@@ -27,7 +27,6 @@ export class MovieComponent implements OnInit {
   isReservationVisible = false;
   displayedColumns: string[] = ['Datetime of show', 'Available seats', 'Reservation'];
   reservationForm: FormGroup;
-  isUserLogged = false;
 
   constructor(private moviesService: MoviesService,
               private route: ActivatedRoute,
@@ -42,10 +41,10 @@ export class MovieComponent implements OnInit {
   ngOnInit(): void {
     this.loadMovie();
     this.createReservationForm();
+  }
 
-    if (this.authService.dekodedToken) {
-      this.isUserLogged = true;
-    }
+  isUserLoggedIn() {
+    return this.authService.isLoggedIn();
   }
 
   loadMovie() {
@@ -115,7 +114,7 @@ export class MovieComponent implements OnInit {
       });
 
       if (!userId) {
-        userId = Number(this.authService.dekodedToken?.nameid);
+        userId = Number(this.authService.getDecodedToken()?.nameid);
       }
 
       this.reservationsService.addReservation(userId, this.show.id, this.seatsToBeReserved).subscribe(res => {

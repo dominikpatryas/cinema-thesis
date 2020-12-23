@@ -12,7 +12,6 @@ import {UserForLogin} from '../_models/UserForLogin';
 export class AuthService {
   base = environment.apiUrl + 'auth/';
   jwtHelper = new JwtHelperService();
-  dekodedToken: any;
   currentUser: User;
   constructor(private http: HttpClient) { }
 
@@ -22,8 +21,7 @@ export class AuthService {
           const user = response;
           if (user) {
             localStorage.setItem('token', user.token);
-            localStorage.setItem('user', JSON.stringify(user.user));
-            this.dekodedToken = this.jwtHelper.decodeToken(user.token);
+            localStorage.setItem('user', JSON.stringify(user));
           }
         }
       ));
@@ -33,10 +31,16 @@ export class AuthService {
   }
 
   isLoggedIn() {
+    return !this.jwtHelper.isTokenExpired(localStorage.getItem('token'));
+  }
+
+  getDecodedToken() {
     const token = localStorage.getItem('token');
+
     if (token) {
-      this.dekodedToken = this.jwtHelper.decodeToken(token);
+      return this.jwtHelper.decodeToken(localStorage.getItem('token'));
     }
-    return !this.jwtHelper.isTokenExpired(token);
+
+    return false;
   }
 }

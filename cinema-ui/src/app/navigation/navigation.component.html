@@ -46,9 +46,15 @@
           <ng-container *ngIf="isLoggedIn()">
             <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
               <button class="btn btn-outline-primary mr-2" id="dropdownManual" ngbDropdownAnchor
-                      (focus)="myDrop.open()">Welcome {{authService.dekodedToken?.unique_name | titlecase}}</button>
+                      (focus)="myDrop.open()">Welcome {{getUserDecodedToken()?.unique_name | titlecase}}</button>
               <div ngbDropdownMenu aria-labelledby="dropdownManual">
                 <button ngbDropdownItem>My profile</button>
+                <ng-container *ngIf="getUserDecodedToken()">
+                  <button ngbDropdownItem>Manage reservations</button>
+                  <button ngbDropdownItem>Add a show</button>
+                  <button ngbDropdownItem>Add a movie</button>
+                  <button ngbDropdownItem>Add a hall</button>
+                </ng-container>
                 <button ngbDropdownItem (click)="logout()">Logout</button>
               </div>
             </div>
