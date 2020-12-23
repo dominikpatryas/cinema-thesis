@@ -1,0 +1,18 @@
+nav {
+  font-family: "Bebas Neue", cursive !important;
+  letter-spacing: 3px !important;
+  border-bottom: 1px solid #e9ecef;
+  color: black;
+  font-size: 17px;
+  height: 100px;
+  background: #fff !important;
+  .container {
+    a {
+      color:black;
+
+      &:hover {
+        color: gray;
+      }
+    }
+  }
+}

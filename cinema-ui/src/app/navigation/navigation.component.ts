@@ -4,6 +4,7 @@ import {AuthService} from '../_services/auth.service';
 import {AlertifyService} from '../_services/alertify.service';
 import {Router} from '@angular/router';
 import {UserForLogin} from '../_models/UserForLogin';
+import {faVideo, faCashRegister, faImage, faAddressCard, faBuilding} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-navigation',
@@ -11,6 +12,13 @@ import {UserForLogin} from '../_models/UserForLogin';
   styleUrls: ['./navigation.component.scss']
 })
 export class NavigationComponent implements OnInit {
+  //icons
+  faVideo = faVideo;
+  faImage = faImage;
+  faCash = faCashRegister;
+  faAddressCard = faAddressCard;
+  faBuilding = faBuilding;
+
   user: UserForLogin;
   loginForm: FormGroup;
 

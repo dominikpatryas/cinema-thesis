@@ -18,6 +18,7 @@ import { ContactComponent } from './contact/contact.component';
 import { MovieComponent } from './movie/movie.component';
 import {MatTableModule} from '@angular/material/table';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {ShowComponent} from './adding-panel/show/show.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     NavigationComponent,
     PriceListComponent,
     ContactComponent,
-    MovieComponent
+    MovieComponent,
+    ShowComponent
   ],
     imports: [
         BrowserModule,

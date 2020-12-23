@@ -1,3 +1,7 @@
+.container {
+  color: #fff;
+}
+
 .seat-reserved {
   background-color: red !important;
 }
@@ -30,3 +34,26 @@
     ". . . . . . . . . ."
     ". . . . . . . . . .";
 }
+
+.movie {
+  & .movie-gallery {
+    width: 50% ;
+    height: 400px;
+
+    & img {
+      object-fit: contain !important;
+      max-width: 100%;
+    }
+  }
+
+  & .movie-description {
+    width: 50%;
+    font-size: 1rem;
+  }
+}
+
+.no-provided-shows {
+  text-decoration: underline;
+  margin-top: 25px;
+}
+

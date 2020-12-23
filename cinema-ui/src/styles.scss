@@ -1,4 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Questrial&display=swap');
+* {
+  font-family: 'Questrial', sans-serif !important;
+  line-height: normal + 10px;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+h1,h2,h3,h4,h5 {
+  font-family: Roboto, sans-serif !important;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: url("/assets/background.jpg");
+}
