@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 @Injectable({
@@ -24,7 +24,7 @@ export class ShowsService {
   }
 
   addShow(show: any) {
-    return this.http.post(this.apiUrl, show);
+    return this.http.post(this.apiUrl, show, {headers: new HttpHeaders('Authorization: Bearer ' + localStorage.getItem('token'))});
   }
 
   deleteShow(id: string) {

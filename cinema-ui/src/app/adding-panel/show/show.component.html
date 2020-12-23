@@ -1,0 +1,47 @@
+<div class="container">
+  <form [formGroup]="showForm" (ngSubmit)="addShow()">
+    <h2 class="text-center text-primary">Add a show</h2>
+    <hr>
+    <div class="form-group">
+
+      <div class="form-group">
+        <select [ngClass]="{'is-invalid': showForm.get('movieId').errors}" class="form-control"
+                placeholder="Movie" formControlName="movieId">
+          <option *ngFor="let movie of movies" ngValue="{{movie?.id}}">{{movie?.title}}</option>
+        </select>
+        <div class="invalid-feedback"
+             *ngIf="showForm.get('movieId').touched && showForm.get('movieId').hasError('required')">Movie is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <select [ngClass]="{'is-invalid': showForm.get('hallId').errors && showForm.get('hallId').touched}"
+                class="form-control"
+                placeholder="Hall" formControlName="hallId">
+          <option *ngFor="let hall of halls" ngValue="{{hall?.id}}">Hall number {{hall?.hallNumber}} ({{hall?.seatNumbers}} seats)</option>
+
+        </select>
+        <div class="invalid-feedback" *ngIf="showForm.get('hallId').touched && showForm.get('hallId').hasError('required')">
+          Hall is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <input [ngClass]="{'is-invalid': showForm.get('datePlayed').errors && showForm.get('datePlayed').touched}"
+               class="form-control"
+               placeholder="Date played" formControlName="datePlayed" type="datetime-local">
+        <div class="invalid-feedback"
+             *ngIf="showForm.get('datePlayed').touched && showForm.get('datePlayed').hasError('required')">Date played
+          is required
+        </div>
+      </div>
+
+      <div class="form-group text-center">
+        <button class="btn btn-success" [disabled]="!showForm.valid" type="submit">Add</button>
+      </div>
+    </div>
+  </form>
+
+  <p>{{showForm.value | json}}</p>
+  <p>{{showForm.status | json}}</p>
+</div>

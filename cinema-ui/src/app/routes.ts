@@ -5,6 +5,7 @@ import {AboutUsComponent} from './about-us/about-us.component';
 import {PriceListComponent} from './price-list/price-list.component';
 import {ContactComponent} from './contact/contact.component';
 import {MovieComponent} from './movie/movie.component';
+import {ShowComponent} from './adding-panel/show/show.component';
 
 
 export const appRoutes: Routes = [
@@ -17,7 +18,10 @@ export const appRoutes: Routes = [
       { path: 'about-us', component: AboutUsComponent},
       { path: 'price-list', component: PriceListComponent},
       { path: 'contact', component: ContactComponent},
-      { path: 'movies/:id', component: MovieComponent}
+      { path: 'movies/:id', component: MovieComponent},
+      { path: 'add/show', component: ShowComponent},
+      // { path: 'add/show', component: ShowComponent},
+      // { path: 'add/show', component: ShowComponent}
     ]
   },
   { path: '**', redirectTo: '', pathMatch: 'full'},

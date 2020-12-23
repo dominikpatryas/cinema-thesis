@@ -42,5 +42,13 @@ namespace cinema_api.Controllers
 
             return StatusCode(201);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetHalls()
+        {
+            var halls = await _repo.GetHalls();
+
+            return StatusCode(200, halls);
+        }
     }
 }

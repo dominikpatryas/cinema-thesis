@@ -31,9 +31,11 @@ namespace cinema_api.Data
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<Hall>> GetHalls()
+        public async Task<IEnumerable<Hall>> GetHalls()
         {
-            throw new System.NotImplementedException();
+            var halls = await _context.Halls.Include(h => h.Shows).ToListAsync();
+
+            return halls;
         }
 
         public bool IsHallExisting()
