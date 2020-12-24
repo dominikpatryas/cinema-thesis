@@ -12,7 +12,7 @@ import {HallsService} from '../../_services/halls.service';
 @Component({
   selector: 'app-show',
   templateUrl: './show.component.html',
-  styleUrls: ['./show.component.css']
+  styleUrls: ['./show.component.scss']
 })
 export class ShowComponent implements OnInit {
   constructor(private authService: AuthService, private alertifyService: AlertifyService, private fb: FormBuilder,
@@ -43,7 +43,7 @@ export class ShowComponent implements OnInit {
     if (this.showForm.valid) {
       const show = Object.assign({}, this.showForm.value);
       this.showsService.addShow(show).subscribe(() => {
-        this.alertifyService.success('Adding show successful');
+        this.alertifyService.success('Added show successfully.');
       }, error => {
         this.alertifyService.error(error);
       });

@@ -6,6 +6,7 @@ import {PriceListComponent} from './price-list/price-list.component';
 import {ContactComponent} from './contact/contact.component';
 import {MovieComponent} from './movie/movie.component';
 import {ShowComponent} from './adding-panel/show/show.component';
+import {HallComponent} from './adding-panel/hall/hall.component';
 
 
 export const appRoutes: Routes = [
@@ -20,7 +21,7 @@ export const appRoutes: Routes = [
       { path: 'contact', component: ContactComponent},
       { path: 'movies/:id', component: MovieComponent},
       { path: 'add/show', component: ShowComponent},
-      // { path: 'add/show', component: ShowComponent},
+      { path: 'add/hall', component: HallComponent},
       // { path: 'add/show', component: ShowComponent}
     ]
   },

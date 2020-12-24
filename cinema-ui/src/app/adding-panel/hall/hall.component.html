@@ -1,0 +1,34 @@
+<div class="container hall">
+  <form [formGroup]="hallForm" (ngSubmit)="addHall()">
+    <h1 class="text-center text-primary mt-4">Add a hall</h1>
+    <hr>
+    <div class="form-group">
+
+      <div class="form-group">
+        <label>HALL NUMBER</label>
+        <input [ngClass]="{'is-invalid': hallForm.get('hallNumber').errors  && hallForm.get('hallNumber').touched}" class="form-control"
+                placeholder="Hall number" formControlName="hallNumber">
+        <div class="invalid-feedback"
+             *ngIf="hallForm.get('hallNumber').touched && hallForm.get('hallNumber').hasError('required')">Hall number is required
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>SEATS COUNT</label>
+        <input [ngClass]="{'is-invalid': hallForm.get('seatNumbers').errors && hallForm.get('seatNumbers').touched}"
+                class="form-control"
+                placeholder="Seats count" formControlName="seatNumbers">
+        <div class="invalid-feedback" *ngIf="hallForm.get('seatNumbers').touched && hallForm.get('seatNumbers').hasError('required')">
+          Seats count is required
+        </div>
+      </div>
+
+      <div class="form-group text-center">
+        <button class="btn btn-success" [disabled]="!hallForm.valid" type="submit">Add</button>
+      </div>
+    </div>
+  </form>
+
+  <p>{{hallForm.value | json}}</p>
+  <p>{{hallForm.status | json}}</p>
+</div>

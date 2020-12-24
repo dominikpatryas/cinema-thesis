@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {environment} from '../../environments/environment';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Hall} from '../_models/Hall';
 import {Observable} from "rxjs";
 
@@ -21,7 +21,7 @@ export class HallsService {
   }
 
   addHall(hall: Hall) {
-    return this.http.post(this.apiUrl, hall);
+    return this.http.post(this.apiUrl, hall, {headers: new HttpHeaders('Authorization: Bearer ' + localStorage.getItem('token'))});
   }
 
   deleteHall(id: string) {

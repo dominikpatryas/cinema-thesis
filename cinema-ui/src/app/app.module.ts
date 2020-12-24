@@ -19,6 +19,7 @@ import { MovieComponent } from './movie/movie.component';
 import {MatTableModule} from '@angular/material/table';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {ShowComponent} from './adding-panel/show/show.component';
+import { HallComponent } from './adding-panel/hall/hall.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {ShowComponent} from './adding-panel/show/show.component';
     PriceListComponent,
     ContactComponent,
     MovieComponent,
-    ShowComponent
+    ShowComponent,
+    HallComponent
   ],
     imports: [
         BrowserModule,
