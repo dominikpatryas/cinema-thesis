@@ -21,14 +21,21 @@ namespace cinema_api.Data
             _context.Halls.Add(hall);
         }
 
-        public Task<bool> DeleteHall(int id)
+        public async Task DeleteHall(int id)
         {
-            throw new System.NotImplementedException();
+            var hall = _context.Halls.FirstOrDefault(h => h.Id == id);
+
+            _context.Remove(hall);
+            await SaveAll();
         }
 
-        public Task<Show> GetHall(int id)
+        public async Task<Hall> GetHall(int id)
         {
-            throw new System.NotImplementedException();
+            var hall = await _context.Halls
+                .Include(h => h.Shows)
+                .FirstOrDefaultAsync(h2 => h2.Id == id);
+
+            return hall;
         }
 
         public async Task<IEnumerable<Hall>> GetHalls()

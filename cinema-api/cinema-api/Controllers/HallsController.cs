@@ -50,5 +50,17 @@ namespace cinema_api.Controllers
 
             return StatusCode(200, halls);
         }
+
+        [Authorize]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteHall(int id)
+        {
+            if (!_authorizer.IsAdminOrEmployee(User))
+                return Unauthorized();
+
+            await _repo.DeleteHall(id);
+
+            return StatusCode(200);
+        }
     }
 }

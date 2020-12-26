@@ -20,9 +20,12 @@ namespace cinema_api.Data
             _context.Movies.Add(movie);
         }
 
-        public Task<bool> DeleteMovie(int id)
+        public async Task DeleteMovie(int id)
         {
-            throw new System.NotImplementedException();
+            var movie = _context.Movies.FirstOrDefault(m => m.Id == id);
+
+            _context.Remove(movie);
+            await SaveAll();
         }
 
         public async Task<Movie> GetMovie(int id)

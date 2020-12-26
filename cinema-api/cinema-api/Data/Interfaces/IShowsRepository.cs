@@ -12,7 +12,7 @@ namespace cinema_api.Data.Interfaces
         Task<IEnumerable<Show>> GetShowsForMovie(int id);
         Task<Show> GetShow(int id);
         void AddShow(Show show);
-        Task<Boolean> DeleteShow(int id);
+        Task DeleteShow(int id);
         Boolean IsShowExisting();
         Task<Boolean> SaveAll();
     }

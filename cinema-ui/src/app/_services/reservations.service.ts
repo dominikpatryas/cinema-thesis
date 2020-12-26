@@ -17,15 +17,19 @@ export class ReservationsService {
     return this.http.post(this.apiUrl, {userId, showId, seatsReserved});
   }
 
+  getManagementReservations(): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(this.apiUrl + 'management', {headers: new HttpHeaders('Authorization: Bearer ' + localStorage.getItem('token'))});
+  }
+
   getReservations(): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(this.apiUrl);
+    return this.http.get<Reservation[]>(this.apiUrl, {headers: new HttpHeaders('Authorization: Bearer ' + localStorage.getItem('token'))});
   }
 
   confirmReservation(id: number) {
-    return this.http.patch(this.apiUrl, id);
+    return this.http.patch(this.apiUrl + id,{ }, {headers: new HttpHeaders('Authorization: Bearer ' + localStorage.getItem('token'))});
   }
 
   declineReservation(id: number) {
-    return this.http.post(this.apiUrl + 'remove', {id});
+    return this.http.delete(this.apiUrl + id, {headers: new HttpHeaders('Authorization: Bearer ' + localStorage.getItem('token'))});
   }
 }

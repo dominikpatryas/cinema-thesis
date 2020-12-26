@@ -9,10 +9,11 @@ namespace cinema_api.Data.Interfaces
     public interface IReservationsRepository
     {
         Task<IEnumerable<Reservation>> GetReservations();
+        Task<IEnumerable<Reservation>> GetManagementReservations();
         Task<Reservation> GetReservation(int id);
-        Task<bool> ConfirmReservation(int id);
+        Task<Boolean> ConfirmReservation(int id);
         void AddReservation(Reservation reservation);
-        Task<Boolean> DeleteReservation(int id);
+        Task DeleteReservation(int id);
         Task<Boolean> SaveAll();
     }
 }

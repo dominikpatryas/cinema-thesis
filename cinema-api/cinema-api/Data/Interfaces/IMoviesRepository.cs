@@ -12,7 +12,7 @@ namespace cinema_api.Data
         Task<IEnumerable<Movie>> GetMovies();
         Task<Movie> GetMovie(int id);
         void AddMovie(Movie movie);
-        Task<Boolean> DeleteMovie(int id);
+        Task DeleteMovie(int id);
         Boolean IsMovieExisting(string name);
         Task<Boolean> SaveAll();
     }

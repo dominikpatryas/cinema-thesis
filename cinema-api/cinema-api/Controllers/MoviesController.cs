@@ -93,6 +93,18 @@ namespace cinema_api.Controllers
             return StatusCode(200, isExisting);
         }
 
+        [Authorize]
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteMovie(int id)
+        {
+            if (!_authorizer.IsAdminOrEmployee(User))
+                return Unauthorized();
+
+            await _repo.DeleteMovie(id);
+
+            return StatusCode(200);
+        }
+
     }
 
 }

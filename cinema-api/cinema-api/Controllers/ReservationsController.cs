@@ -45,9 +45,21 @@ namespace cinema_api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetReservations()
+        public async Task<IActionResult> GetAllReservations()
         {
             var reservations = await _repo.GetReservations();
+
+            return StatusCode(200, reservations);
+        }
+
+        [Authorize]
+        [HttpGet("management")]
+        public async Task<IActionResult> GetManagementReservations()
+        {
+            if (!_authorizer.IsAdminOrEmployee(User))
+                return Unauthorized();
+
+            var reservations = await _repo.GetManagementReservations();
 
             return StatusCode(200, reservations);
         }
@@ -68,6 +80,18 @@ namespace cinema_api.Controllers
                 return Unauthorized();
 
             await _repo.ConfirmReservation(reservationId);
+
+            return StatusCode(200);
+        }
+
+        [Authorize]
+        [HttpDelete("{reservationId}")]
+        public async Task<IActionResult> DeleteReservation(int reservationId)
+        {
+            if (!_authorizer.IsAdminOrEmployee(User))
+                return Unauthorized();
+
+            await _repo.DeleteReservation(reservationId);
 
             return StatusCode(200);
         }

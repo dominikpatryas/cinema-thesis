@@ -9,9 +9,9 @@ namespace cinema_api.Data.Interfaces
     public interface IHallsRepository
     {
         Task<IEnumerable<Hall>> GetHalls();
-        Task<Show> GetHall(int id);
+        Task<Hall> GetHall(int id);
         void AddHall(Hall hall);
-        Task<Boolean> DeleteHall(int id);
+        Task DeleteHall(int id);
         Boolean IsHallExisting();
         Task<Boolean> SaveAll();
     }

@@ -21,9 +21,12 @@ namespace cinema_api.Data
             _context.Shows.Add(show);
         }
 
-        public Task<bool> DeleteShow(int id)
+        public async Task DeleteShow(int id)
         {
-            throw new System.NotImplementedException();
+            var show = _context.Shows.Include(r => r.SeatsReserved).FirstOrDefault(s => s.Id == id);
+
+            _context.Remove(show);
+            await SaveAll();
         }
 
         public async Task<IEnumerable<Show>> GetShows()

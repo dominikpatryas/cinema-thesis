@@ -20,9 +20,12 @@ namespace cinema_api.Data.Repositories
             _context.Reservations.Add(reservation);
         }
 
-        public Task<bool> DeleteReservation(int id)
+        public async Task DeleteReservation(int id)
         {
-            throw new NotImplementedException();
+            var reservation = _context.Reservations.FirstOrDefault(r => r.Id == id);
+
+            _context.Remove(reservation);
+            await SaveAll();
         }
 
         public async Task<Reservation> GetReservation(int id)
@@ -39,12 +42,21 @@ namespace cinema_api.Data.Repositories
             return reservations;
         }
 
-        public async Task<bool> ConfirmReservation(int id)
+        public async Task<IEnumerable<Reservation>> GetManagementReservations()
+        {
+            var reservations = await _context.Reservations
+                .Include(x => x.SeatsReserved)
+                .Where(y => y.IsConfirmed == false)
+                .ToListAsync();
+
+            return reservations;
+        }
+
+        public async Task<Boolean> ConfirmReservation(int id)
         {
             var reservation = await _context.Reservations.FirstOrDefaultAsync(r => r.Id == id);
 
             reservation.IsConfirmed = true;
-
             await SaveAll();
 
             return true;
