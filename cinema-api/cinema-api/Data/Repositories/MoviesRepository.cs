@@ -30,6 +30,7 @@ namespace cinema_api.Data
             var movie = await _context.Movies
                 .Include(x => x.Photos)
                 .Include(x => x.Casts)
+                .Include(x => x.Types)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             return movie;
@@ -40,6 +41,7 @@ namespace cinema_api.Data
             var movies = await _context.Movies
                 .Include(x => x.Photos)
                 .Include(x => x.Casts)
+                .Include(x => x.Types)
                 .ToListAsync();
             
             return movies;

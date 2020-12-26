@@ -52,11 +52,11 @@
                       (focus)="myDrop.open()">Welcome {{getUserDecodedToken()?.unique_name | titlecase}}</button>
               <div ngbDropdownMenu aria-labelledby="dropdownManual">
                 <button ngbDropdownItem>My profile</button>
-                <ng-container *ngIf="getUserDecodedToken()">
-                  <button ngbDropdownItem>Manage reservations</button>
-                  <button ngbDropdownItem>Add a show</button>
-                  <button ngbDropdownItem>Add a movie</button>
-                  <button ngbDropdownItem>Add a hall</button>
+                <ng-container *ngIf="isAdminOrEmployee()">
+                  <button ngbDropdownItem routerLink="/reservations">Manage reservations</button>
+                  <button ngbDropdownItem routerLink="/add/show">Add a show</button>
+                  <button ngbDropdownItem routerLink="/add/movie">Add a movie</button>
+                  <button ngbDropdownItem routerLink="/add/hall">Add a hall</button>
                 </ng-container>
                 <button ngbDropdownItem (click)="logout()">Logout</button>
               </div>

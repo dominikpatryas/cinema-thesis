@@ -13,6 +13,6 @@ namespace cinema_api.Models
         public int UserId { get; set; }
         public int ShowId { get; set; }
         public List<SeatReserved> SeatsReserved { get; set; }
-        public int isConfirmed { get; set; }
+        public bool IsConfirmed { get; set; }
     }
 }

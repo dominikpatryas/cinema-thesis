@@ -8,8 +8,9 @@ import {DateService} from '../_services/date.service';
 import {ReservationsService} from '../_services/reservations.service';
 import {AuthService} from '../_services/auth.service';
 import {faCalendarAlt} from '@fortawesome/free-solid-svg-icons';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import * as uuid from 'uuid';
+import {Show} from '../_models/Show';
 @Component({
   selector: 'app-movie',
   templateUrl: './movie.component.html',
@@ -20,8 +21,8 @@ export class MovieComponent implements OnInit {
   faCalendarAlt = faCalendarAlt;
 
   movie: Movie;
-  shows: any[];
-  show: any;
+  shows: Show[];
+  show: Show;
   seatsToBeReserved = [];
   seatsReserved = [];
   isReservationVisible = false;
@@ -60,7 +61,6 @@ export class MovieComponent implements OnInit {
   loadShowsForMovie() {
     this.showsService.getShowsForMovie(this.route.snapshot.params.id).subscribe(shows => {
       this.shows = shows;
-      console.log(this.shows);
     }, error => {
       this.alertify.error('Error in loading shows for movie');
     });
@@ -81,8 +81,6 @@ export class MovieComponent implements OnInit {
         this.show.seatsReserved.forEach((seat) => {
           this.seatsReserved.push(seat.seatNumber);
         });
-        console.log('seatsAlreadyReserved', this.seatsReserved);
-        console.log(show);
       }, error => {
         this.alertify.error('Error in loading show');
       });
@@ -95,8 +93,6 @@ export class MovieComponent implements OnInit {
     }
 
     this.seatsToBeReserved.includes(seatNumber) ? this.removeSeat(seatNumber) : this.seatsToBeReserved.push(seatNumber);
-
-    console.log(this.seatsToBeReserved);
   }
 
   removeSeat(seatNumber) {
@@ -151,9 +147,8 @@ export class MovieComponent implements OnInit {
       this.authService.register(reservationUser).subscribe((createdReservationUserId: any) => {
 
         this.createReservation(createdReservationUserId);
-        this.alertify.success('Registration successful');
       }, error => {
-        this.alertify.error(error);
+        this.alertify.error('Error while adding reservation');
       });
     }
   }

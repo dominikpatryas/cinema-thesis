@@ -6,6 +6,9 @@ export interface Movie {
   title: string;
   description: string;
   trailerUrl: string;
+  year: number;
+  types: [{type: string}];
+  duration: number;
   photos: Photo[];
   casts: Cast[];
 }

@@ -39,6 +39,17 @@ namespace cinema_api.Data.Repositories
             return reservations;
         }
 
+        public async Task<bool> ConfirmReservation(int id)
+        {
+            var reservation = await _context.Reservations.FirstOrDefaultAsync(r => r.Id == id);
+
+            reservation.IsConfirmed = true;
+
+            await SaveAll();
+
+            return true;
+        }
+
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;

@@ -18,8 +18,13 @@ import { ContactComponent } from './contact/contact.component';
 import { MovieComponent } from './movie/movie.component';
 import {MatTableModule} from '@angular/material/table';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {ShowComponent} from './adding-panel/show/show.component';
-import { HallComponent } from './adding-panel/hall/hall.component';
+import {AddShowComponent} from './adding-panel/show/add-show.component';
+import { AddHallComponent } from './adding-panel/hall/add-hall.component';
+import {AuthGuard} from './_guards/auth.guard';
+import { AddMovieComponent } from './adding-panel/add-movie/add-movie.component';
+import { ReservationsComponent } from './reservations/reservations.component';
+import { VideoComponent } from './video/video.component';
+import {SafeVideoPipe} from './_pipes/SafeVideoPipe';
 
 @NgModule({
   declarations: [
@@ -33,8 +38,12 @@ import { HallComponent } from './adding-panel/hall/hall.component';
     PriceListComponent,
     ContactComponent,
     MovieComponent,
-    ShowComponent,
-    HallComponent
+    AddShowComponent,
+    AddHallComponent,
+    AddMovieComponent,
+    ReservationsComponent,
+    VideoComponent,
+    SafeVideoPipe
   ],
     imports: [
         BrowserModule,
@@ -44,9 +53,11 @@ import { HallComponent } from './adding-panel/hall/hall.component';
         NgbModule,
         RouterModule.forRoot(appRoutes),
         MatTableModule,
-        FontAwesomeModule
+        FontAwesomeModule,
     ],
-  providers: [],
+  providers: [
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

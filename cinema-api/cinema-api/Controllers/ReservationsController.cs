@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using cinema_api.Data.Interfaces;
 using cinema_api.Dtos.Reservations;
+using cinema_api.Helpers.Interfaces;
 using cinema_api.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,11 +19,13 @@ namespace cinema_api.Controllers
     {
         private IReservationsRepository _repo;
         private readonly IMapper _mapper;
+        private readonly IAuthorizer _authorizer;
 
-        public ReservationsController(IReservationsRepository repo, IMapper mapper)
+        public ReservationsController(IReservationsRepository repo, IMapper mapper, IAuthorizer authorizer)
         {
             _repo = repo;
             _mapper = mapper;
+            _authorizer = authorizer;
         }
 
         [HttpPost]
@@ -55,6 +58,18 @@ namespace cinema_api.Controllers
             var reservation = await _repo.GetReservation(reservationId);
 
             return StatusCode(200, reservation);
+        }
+
+        [Authorize]
+        [HttpPatch("{reservationId}")]
+        public async Task<IActionResult> ConfirmReservation(int reservationId)
+        {
+            if (!_authorizer.IsAdminOrEmployee(User))
+                return Unauthorized();
+
+            await _repo.ConfirmReservation(reservationId);
+
+            return StatusCode(200);
         }
     }
 }

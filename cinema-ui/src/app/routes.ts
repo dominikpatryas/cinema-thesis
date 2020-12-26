@@ -5,8 +5,11 @@ import {AboutUsComponent} from './about-us/about-us.component';
 import {PriceListComponent} from './price-list/price-list.component';
 import {ContactComponent} from './contact/contact.component';
 import {MovieComponent} from './movie/movie.component';
-import {ShowComponent} from './adding-panel/show/show.component';
-import {HallComponent} from './adding-panel/hall/hall.component';
+import {AddShowComponent} from './adding-panel/show/add-show.component';
+import {AddHallComponent} from './adding-panel/hall/add-hall.component';
+import {AuthGuard} from './_guards/auth.guard';
+import {AddMovieComponent} from './adding-panel/add-movie/add-movie.component';
+import {ReservationsComponent} from './reservations/reservations.component';
 
 
 export const appRoutes: Routes = [
@@ -20,9 +23,10 @@ export const appRoutes: Routes = [
       { path: 'price-list', component: PriceListComponent},
       { path: 'contact', component: ContactComponent},
       { path: 'movies/:id', component: MovieComponent},
-      { path: 'add/show', component: ShowComponent},
-      { path: 'add/hall', component: HallComponent},
-      // { path: 'add/show', component: ShowComponent}
+      { path: 'add/show', component: AddShowComponent, canActivate: [AuthGuard]},
+      { path: 'add/hall', component: AddHallComponent, canActivate: [AuthGuard]},
+      { path: 'add/movie', component: AddMovieComponent, canActivate: [AuthGuard]},
+      { path: 'reservations', component: ReservationsComponent, canActivate: [AuthGuard]}
     ]
   },
   { path: '**', redirectTo: '', pathMatch: 'full'},

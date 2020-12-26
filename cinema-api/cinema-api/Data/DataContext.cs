@@ -22,5 +22,6 @@ namespace cinema_api.Data
         public DbSet<Ticket> Tickets { get; set; }
         public DbSet<SeatReserved> SeatsReserved { get; set; }
         public DbSet<Cast> Casts { get; set; }
+        public DbSet<MovieType> MovieTypes { get; set; }
     }
 }

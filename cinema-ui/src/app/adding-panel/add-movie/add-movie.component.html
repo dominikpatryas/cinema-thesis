@@ -1,0 +1,95 @@
+<div class="container white">
+  <form [formGroup]="movieForm" (ngSubmit)="addMovie()">
+    <h1 class="text-center text-primary mt-4">Add a movie</h1>
+    <hr>
+    <div class="form-group">
+
+      <div class="form-group">
+        <label>MOVIE TITLE</label>
+        <input [ngClass]="{'is-invalid': movieForm.get('title').errors  && movieForm.get('title').touched}"
+               class="form-control"
+               placeholder="Title" formControlName="title">
+        <div class="invalid-feedback"
+             *ngIf="movieForm.get('title').touched && movieForm.get('title').hasError('required')">Title is required
+        </div>
+      </div>
+
+      <label>DESCRIPTION</label>
+      <textarea [ngClass]="{'is-invalid': movieForm.get('description').errors  && movieForm.get('description').touched}"
+             class="form-control"
+                placeholder="Description" formControlName="description"></textarea>
+      <div class="invalid-feedback"
+           *ngIf="movieForm.get('description').touched && movieForm.get('description').hasError('required')">Description
+        is required
+      </div>
+
+    <label>TRAILER URL</label>
+    <input [ngClass]="{'is-invalid': movieForm.get('trailerUrl').errors  && movieForm.get('trailerUrl').touched}"
+           class="form-control"
+           placeholder="Trailer Url" formControlName="trailerUrl">
+    <div class="invalid-feedback"
+         *ngIf="movieForm.get('trailerUrl').touched && movieForm.get('trailerUrl').hasError('required')">Trailer url is
+      required
+    </div>
+
+    <label>Production year</label>
+    <input [ngClass]="{'is-invalid': movieForm.get('year').errors  && movieForm.get('year').touched}"
+           class="form-control"
+           type="number"
+           placeholder="Production Year" formControlName="year">
+    <div class="invalid-feedback"
+         *ngIf="movieForm.get('year').touched && movieForm.get('year').hasError('required')">Production year is required
+    </div>
+
+    <label>DURATION IN MINUTES</label>
+    <input [ngClass]="{'is-invalid': movieForm.get('duration').errors  && movieForm.get('duration').touched}"
+           class="form-control"
+           type="number"
+           placeholder="Duration In Minutes" formControlName="duration">
+    <div class="invalid-feedback"
+         *ngIf="movieForm.get('duration').touched && movieForm.get('duration').hasError('required')">Duration is
+      required
+    </div>
+
+      <label>Movie types</label>
+      <input [ngClass]="{'is-invalid': movieForm.get('types').errors  && movieForm.get('types').touched}"
+             class="form-control"
+             placeholder="Movie types (use a colon if you want to specify more than one)" formControlName="types">
+      <div class="invalid-feedback"
+           *ngIf="movieForm.get('types').touched && movieForm.get('types').hasError('required')">Types is required
+      </div>
+
+    <label>CASTS</label>
+    <input [ngClass]="{'is-invalid': movieForm.get('casts').errors  && movieForm.get('casts').touched}"
+           class="form-control"
+           placeholder="First Name Last Name (use a colon if you want to specify more than one)" formControlName="casts">
+    <div class="invalid-feedback"
+         *ngIf="movieForm.get('casts').touched && movieForm.get('casts').hasError('required')">First name last name is
+      required
+    </div>
+
+    <label>Photos</label>
+    <input [ngClass]="{'is-invalid': movieForm.get('photos').errors  && movieForm.get('photos').touched}"
+           class="form-control"
+           placeholder="Photo url (use a colon if you want to specify more than one)" formControlName="photos">
+    <div class="invalid-feedback"
+         *ngIf="movieForm.get('photos').touched && movieForm.get('photos').hasError('required')">Photo url is required
+    </div>
+
+      <label>Datetime played</label>
+      <input [ngClass]="{'is-invalid': movieForm.get('datePlayed').errors  && movieForm.get('datePlayed').touched}"
+             class="form-control" type="datetime-local"
+             placeholder="Datetime played" formControlName="datePlayed">
+      <div class="invalid-feedback"
+           *ngIf="movieForm.get('datePlayed').touched && movieForm.get('datePlayed').hasError('required')">Datetime played is required
+      </div>
+
+    <div class="form-group text-center">
+      <button class="btn btn-success" [disabled]="!movieForm.valid" type="submit">Add</button>
+    </div>
+</div>
+</form>
+
+<p>{{movieForm.value | json}}</p>
+<p>{{movieForm.status | json}}</p>
+</div>

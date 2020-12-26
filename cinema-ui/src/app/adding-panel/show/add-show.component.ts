@@ -11,10 +11,10 @@ import {HallsService} from '../../_services/halls.service';
 
 @Component({
   selector: 'app-show',
-  templateUrl: './show.component.html',
-  styleUrls: ['./show.component.scss']
+  templateUrl: './add-show.component.html',
+  styleUrls: ['./add-show.component.scss']
 })
-export class ShowComponent implements OnInit {
+export class AddShowComponent implements OnInit {
   constructor(private authService: AuthService, private alertifyService: AlertifyService, private fb: FormBuilder,
               private route: Router,
               private showsService: ShowsService,
@@ -55,6 +55,6 @@ export class ShowComponent implements OnInit {
   }
 
   getHalls() {
-    this.hallsService.getHalls().subscribe(halls => { this.halls = halls; console.log(halls) });
+    this.hallsService.getHalls().subscribe(halls => { this.halls = halls; });
   }
 }

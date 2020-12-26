@@ -43,4 +43,16 @@ export class AuthService {
 
     return false;
   }
+
+  isAdmin() {
+    return this.getDecodedToken().Admin;
+  }
+
+  isEmployee() {
+    return this.getDecodedToken().Employee;
+  }
+
+  isAdminOrEmployee() {
+    return this.isEmployee() || this.isAdmin();
+  }
 }

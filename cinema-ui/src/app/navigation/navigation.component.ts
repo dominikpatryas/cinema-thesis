@@ -31,6 +31,7 @@ export class NavigationComponent implements OnInit {
     this.createLoginForm();
 
     console.log(this.getUserDecodedToken());
+
   }
 
   createLoginForm() {
@@ -70,5 +71,9 @@ export class NavigationComponent implements OnInit {
 
   isLoggedIn() {
     return this.authService.isLoggedIn();
+  }
+
+  isAdminOrEmployee() {
+    return this.authService.isAdminOrEmployee();
   }
 }

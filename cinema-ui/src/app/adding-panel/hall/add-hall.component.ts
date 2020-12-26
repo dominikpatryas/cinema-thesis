@@ -5,10 +5,10 @@ import {AlertifyService} from '../../_services/alertify.service';
 
 @Component({
   selector: 'app-hall',
-  templateUrl: './hall.component.html',
-  styleUrls: ['./hall.component.scss']
+  templateUrl: './add-hall.component.html',
+  styleUrls: ['./add-hall.component.scss']
 })
-export class HallComponent implements OnInit {
+export class AddHallComponent implements OnInit {
   hallForm: FormGroup;
   constructor(private hallsService: HallsService, private fb: FormBuilder, private alertifyService: AlertifyService) { }
 

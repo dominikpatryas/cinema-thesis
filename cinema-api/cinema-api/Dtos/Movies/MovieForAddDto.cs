@@ -10,6 +10,9 @@ namespace cinema_api.Dtos
         public string Title { get; set; }
         public string Description { get; set; }
         public string TrailerUrl { get; set; }
+        public int Year { get; set; }
+        public ICollection<MovieType> Types { get; set; }
+        public int Duration { get; set; }
         public ICollection<PhotoForAddDto> Photos { get; set; }
         public ICollection<CastForAddDto> Casts { get; set; }
     }

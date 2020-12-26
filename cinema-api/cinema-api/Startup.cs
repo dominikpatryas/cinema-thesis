@@ -25,6 +25,7 @@ namespace cinema_api
 {
     public class Startup
     {
+        readonly string myOrigins = "http://localhost:4201";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -78,7 +79,6 @@ namespace cinema_api
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
             app.UseAuthorization();
 
