@@ -23,9 +23,16 @@ namespace cinema_api.Data
 
         public async Task DeleteShow(int id)
         {
-            var show = _context.Shows.Include(r => r.SeatsReserved).FirstOrDefault(s => s.Id == id);
+            var show = _context.Shows
+                .Include(r => r.SeatsReserved)
+                .FirstOrDefault(s => s.Id == id);
+
+            var reservations = _context.Reservations
+                .Include(z=>z.SeatsReserved)
+                .Where(r => r.ShowId == id);
 
             _context.Remove(show);
+            _context.RemoveRange(reservations);
             await SaveAll();
         }
 
