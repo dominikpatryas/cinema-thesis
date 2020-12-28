@@ -10,6 +10,7 @@ namespace cinema_api.Models
         public int Id { get; set; }
         public DateTime DatePlayed { get; set; }
         public int MovieId { get; set; }
+        public Movie Movie { get; set; }
         public int HallId { get; set; }
         public Hall Hall { get; set; }
         public List<SeatReserved> SeatsReserved { get; set; }

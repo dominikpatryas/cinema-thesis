@@ -35,12 +35,14 @@ export class ReservationsComponent implements OnInit {
 
   confirmReservation(id: number) {
     this.reservationsService.confirmReservation(id).subscribe(response => {
+      this.getReservations();
       this.alertifyService.success('Successfully confirmed a reservation');
     });
   }
 
   declineReservation(id: number) {
     this.reservationsService.declineReservation(id).subscribe(response => {
+      this.getReservations();
       this.alertifyService.success('Successfully deleted a reservation');
     });
   }

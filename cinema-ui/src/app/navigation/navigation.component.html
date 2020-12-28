@@ -51,7 +51,7 @@
               <button class="btn btn-outline-primary mr-2" id="dropdownManual" ngbDropdownAnchor
                       (focus)="myDrop.open()">Welcome {{getUserDecodedToken()?.unique_name | titlecase}}</button>
               <div ngbDropdownMenu aria-labelledby="dropdownManual">
-                <button ngbDropdownItem>My profile</button>
+                <button ngbDropdownItem routerLink="/profile">My profile</button>
                 <ng-container *ngIf="isAdminOrEmployee()">
                   <button ngbDropdownItem routerLink="/reservations">Manage reservations</button>
                   <button ngbDropdownItem routerLink="/add/show">Add a show</button>

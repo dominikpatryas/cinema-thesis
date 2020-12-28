@@ -8,4 +8,6 @@ export interface User {
   created: Date;
   city: string;
   country: string;
+  reservations: any[];
+  ticket: any;
 }

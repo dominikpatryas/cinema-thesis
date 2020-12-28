@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using cinema_api.Data;
@@ -15,6 +17,15 @@ namespace cinema_api.Helpers
 {
     public class Authorizer : IAuthorizer
     {
+        public string GetUserClaim(string token, string claimType)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var tokenS = handler.ReadToken(token) as JwtSecurityToken;
+            var claim = tokenS.Claims.First(claim => claim.Type == claimType).Value;
+
+            return claim;
+        }
+
         public bool IsAdmin(ClaimsPrincipal _user)
         {
             if (_user.FindFirst("Admin").Value == "true")

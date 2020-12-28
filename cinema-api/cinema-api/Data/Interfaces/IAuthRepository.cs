@@ -10,6 +10,7 @@ namespace cinema_api.Data
     {
         Task<User> Register(User user, string password);
         Task<User> Login(string username, string password);
+        Task<User> GetUser(int id);
         Task<bool> UserExists(string username);
     }
 }

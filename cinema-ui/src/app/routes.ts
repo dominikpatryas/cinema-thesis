@@ -10,7 +10,7 @@ import {AddHallComponent} from './adding-panel/hall/add-hall.component';
 import {AuthGuard} from './_guards/auth.guard';
 import {AddMovieComponent} from './adding-panel/add-movie/add-movie.component';
 import {ReservationsComponent} from './reservations/reservations.component';
-
+import {MyProfileComponent} from './my-profile/my-profile.component';
 
 export const appRoutes: Routes = [
   { path: '', component: HomeComponent},
@@ -26,7 +26,8 @@ export const appRoutes: Routes = [
       { path: 'add/show', component: AddShowComponent, canActivate: [AuthGuard]},
       { path: 'add/hall', component: AddHallComponent, canActivate: [AuthGuard]},
       { path: 'add/movie', component: AddMovieComponent, canActivate: [AuthGuard]},
-      { path: 'reservations', component: ReservationsComponent, canActivate: [AuthGuard]}
+      { path: 'reservations', component: ReservationsComponent, canActivate: [AuthGuard]},
+      { path: 'profile', component: MyProfileComponent, canActivate: [AuthGuard]}
     ]
   },
   { path: '**', redirectTo: '', pathMatch: 'full'},

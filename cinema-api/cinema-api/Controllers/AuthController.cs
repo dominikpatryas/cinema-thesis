@@ -1,10 +1,15 @@
 ﻿using AutoMapper;
 using cinema_api.Data;
 using cinema_api.Dtos;
+using cinema_api.Dtos.Users;
+using cinema_api.Helpers.Interfaces;
 using cinema_api.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Net.Http.Headers;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -22,12 +27,14 @@ namespace cinema_api.Controllers
         private readonly IAuthRepository _repo;
         private IConfiguration _config;
         private readonly IMapper _mapper;
+        private readonly IAuthorizer _authorizer;
 
-        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
+        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper, IAuthorizer authorizer)
         {
             _repo = repo;
             _config = config;
             _mapper = mapper;
+            _authorizer = authorizer;
         }
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
@@ -63,7 +70,8 @@ namespace cinema_api.Controllers
 
             return Ok(new
             {
-                token = tokenHandler.WriteToken(token)
+                token = tokenHandler.WriteToken(token),
+                userId = userFromRepo.Id
             });
         }
 
@@ -86,6 +94,19 @@ namespace cinema_api.Controllers
             {
                 return StatusCode(201);
             }
+        }
+
+        [Authorize]
+        [HttpGet("reservations")]
+        public async Task<IActionResult> GetUserReservations()
+        {
+            var token = await HttpContext.GetTokenAsync("access_token");
+            var userId = _authorizer.GetUserClaim(token, "nameid");
+            
+            var user = await _repo.GetUser(Int32.Parse(userId));
+            var userReservations = _mapper.Map<UserForReservationDto>(user);
+            
+            return StatusCode(200, userReservations);
         }
     }
 }

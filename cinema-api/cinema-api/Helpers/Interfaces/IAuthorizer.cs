@@ -11,5 +11,6 @@ namespace cinema_api.Helpers.Interfaces
         public bool IsAdmin(ClaimsPrincipal _user);
         public bool IsEmployee(ClaimsPrincipal _user);
         public bool IsAdminOrEmployee(ClaimsPrincipal _user);
+        public string GetUserClaim(string token, string claimType);
     }
 }

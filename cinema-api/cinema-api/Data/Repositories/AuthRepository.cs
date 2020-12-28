@@ -60,12 +60,23 @@ namespace cinema_api.Data
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512())
             {
-                passwordSalt = hmac.Key;                                                        // creating a salt
-                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password)); // hashing a password
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
         }
 
+        public async Task<User> GetUser(int id)
+        {
+            var user = await _context.Users
+                .Include(x => x.Reservations)
+                .ThenInclude(s => s.SeatsReserved)
+                .Include(r => r.Reservations)
+                .ThenInclude(sh => sh.Show)
+                .ThenInclude(m => m.Movie)
+                .FirstOrDefaultAsync(u => u.Id == id);
 
+            return user;
+        }
 
         public async Task<bool> UserExists(string email)
         {

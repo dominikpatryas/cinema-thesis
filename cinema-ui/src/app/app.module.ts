@@ -25,6 +25,7 @@ import { AddMovieComponent } from './adding-panel/add-movie/add-movie.component'
 import { ReservationsComponent } from './reservations/reservations.component';
 import { VideoComponent } from './video/video.component';
 import {SafeVideoPipe} from './_pipes/SafeVideoPipe';
+import { MyProfileComponent } from './my-profile/my-profile.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {SafeVideoPipe} from './_pipes/SafeVideoPipe';
     AddMovieComponent,
     ReservationsComponent,
     VideoComponent,
-    SafeVideoPipe
+    SafeVideoPipe,
+    MyProfileComponent
   ],
     imports: [
         BrowserModule,

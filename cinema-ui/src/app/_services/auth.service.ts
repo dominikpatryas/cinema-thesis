@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {User} from '../_models/User';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {map} from 'rxjs/operators';
 import {JwtHelperService} from '@auth0/angular-jwt';
@@ -18,10 +18,9 @@ export class AuthService {
   logIn(model: UserForLogin | User) {
     return this.http.post(this.base + 'login', model)
       .pipe(map((response: any) =>  {
-          const user = response;
-          if (user) {
-            localStorage.setItem('token', user.token);
-            localStorage.setItem('user', JSON.stringify(user));
+          if (response) {
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('userId', JSON.stringify(response.userId));
           }
         }
       ));
@@ -32,6 +31,10 @@ export class AuthService {
 
   isLoggedIn() {
     return !this.jwtHelper.isTokenExpired(localStorage.getItem('token'));
+  }
+
+  getUserReservations() {
+    return this.http.get(this.base + 'reservations', {headers: new HttpHeaders('Authorization: Bearer ' + localStorage.getItem('token'))} );
   }
 
   getDecodedToken() {
