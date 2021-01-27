@@ -47,7 +47,7 @@
           <div *ngIf="contactForm.get('email').touched && contactForm.get('email').hasError('required')">Email is required</div>
         </div>
         <div class="form-group">
-          <textarea type="text" class="form-control" id="inputMessage" formControlName="message" placeholder="Wiadomość" rows="5" (focus)="sent = false"></textarea>
+          <textarea type="text" class="form-control" id="inputMessage" formControlName="message" placeholder="Message" rows="5" (focus)="sent = false"></textarea>
           <div *ngIf="contactForm.get('message').touched && contactForm.get('message').hasError('required')">Message must not be empty</div>
         </div>
         <ng-container *ngIf="sent">
