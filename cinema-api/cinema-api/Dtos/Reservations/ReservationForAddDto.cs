@@ -14,5 +14,7 @@ namespace cinema_api.Dtos.Reservations
         public int ShowId { get; set; }
         public List<SeatReserved> SeatsReserved { get; set; }
         public bool IsConfirmed { get; set; }
+        public int ReducedTickets { get; set; }
+        public int NormalTickets { get; set; }
     }
 }

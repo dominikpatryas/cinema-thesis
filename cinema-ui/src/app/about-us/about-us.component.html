@@ -1,1 +1,63 @@
-<p>about-us works!</p>
+<div class="container">
+  <h1 class="my-4 about-us-header white">About us</h1>
+  <div class="row flex justify-content-between pb-4">
+    <div class="border-bottom col-md-6 text-center btn btn-light" [ngClass]="{'mini-nav-option-active': currentSection === aboutUsSections[0]}" (click)="setCurrentSection(aboutUsSections[0])">
+      Our company
+    </div>
+    <div class="border-bottom col-md-6 text-center btn btn-light mini-nav-option-active" [ngClass]="{'mini-nav-option-active': currentSection === aboutUsSections[1]}" (click)="setCurrentSection(aboutUsSections[1])">
+      FAQ
+    </div>
+  </div>
+  <div class="row flex white" *ngIf="currentSection === aboutUsSections[0]">
+    <div class=" col-md-7">
+      <img class="mb-5 img-fluid" src="https://jastrzebieonline.pl/files/images/newsy/listopad_2019/cinema-city-big.jpg">
+      <p class="description">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ac augue orci. Aliquam erat volutpat. Pellentesque placerat nec enim ac volutpat. Quisque a augue in neque ultricies elementum. <br> <br>
+
+        Integer in augue lorem. Duis imperdiet mauris congue, consequat neque pellentesque, pretium tellus. Phasellus sed massa vel nibh scelerisque pulvinar. Curabitur nec tempus turpis, non dapibus nulla. Proin ligula nisi, tristique porttitor elit non, fringilla dictum est. Etiam massa ex, consequat nec consequat id, consectetur at turpis.
+        <br><br>
+        Praesent eleifend magna non mi dignissim lobortis. Nulla a tellus nec neque pharetra convallis ac et nulla. Nulla sit amet maximus orci, nec elementum tortor. Aenean luctus augue a augue consequat scelerisque. Praesent odio lacus, placerat et volutpat at, luctus sit amet odio.
+        <br><br>
+        Maecenas et eleifend nibh. Ut sollicitudin quam ut finibus egestas.
+        <br><br>
+
+      </p>
+    </div>
+
+    <div class="col-md-5 text-center pt-4">
+      <h4 class="h4 overflow-hidden" style="overflow-wrap: break-word;">Like our social medias!</h4> <br>
+      <div class="row socials-list">
+        <ul class="list-unstyled list-inline text-center">
+          <li class="list-inline-item">
+            <a class="btn-floating btn-fb mx-1" href="{{facebookUrl}}">
+              <i class="fab fa-facebook"> </i>
+            </a>
+          </li>
+          <li class="list-inline-item">
+            <a class="btn-floating btn-tw mx-1" href="{{twitterUrl}}">
+              <i class="fab fa-instagram"> </i>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+    </div>
+  </div>
+  <div class="row white" *ngIf="currentSection === aboutUsSections[1]">
+    <div class="faq-content px-sm-2">
+      <dl><dt><em class="el el-hand-right header-sign">&nbsp;</em>Ile kosztuje diagnoza?</dt>
+        <dd><i class="fa fa-hand-point-right"></i> Diagnoza jest bezpłatna.</dd>
+        <dt><em class="el el-hand-right header-sign">&nbsp;</em>Ile trwa diagnoza?</dt>
+        <dd><i class="fa fa-hand-point-right"></i> Średnio około trzech dni roboczych. Diagnozę ekspresową przeprowadzamy odpłatnie.</dd>
+        <dt><em class="el el-hand-right header-sign">&nbsp;</em>Ile kosztuje naprawa?</dt>
+        <dd><i class="fa fa-hand-point-right"></i> Każdą naprawę traktujemy indywidualnie, dlatego też trudno podać konkretną cenę bez dokładnej diagnozy usterki. Bezpłatnie sprawdzimy laptop i przedstawimy Ci wycenę do akceptacji.</dd>
+        <dt><em class="el el-hand-right header-sign">&nbsp;</em>Ile trwa naprawa?</dt>
+        <dd><i class="fa fa-hand-point-right"></i> Nulla sit amet maximus orci, nec elementum tortor. Aenean luctus augue a augue consequat scelerisque. Praesent odio lacus, placerat et volutpat at, luctus sit amet odio..</dd>
+        <dt><em class="el el-hand-right header-sign">&nbsp;</em>Czy otrzymam fakturę za naprawę?</dt>
+        <dd><i class="fa fa-hand-point-right"></i> Oczywiście, jesteśmy legalnie działającą firmą.</dd>
+        <dt><em class="el el-hand-right header-sign">&nbsp;</em>Czy mogę liczyć na gwarancję?</dt>
+        <dd><i class="fa fa-hand-point-right"></i> Nulla sit amet maximus orci, nec elementum tortor. Aenean luctus augue a augue consequat scelerisque. Praesent odio lacus, placerat et volutpat at, luctus sit amet odio.</dd>
+      </dl>
+    </div>
+  </div>
+</div>

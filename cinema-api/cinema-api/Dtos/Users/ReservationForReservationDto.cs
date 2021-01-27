@@ -13,5 +13,6 @@ namespace cinema_api.Dtos.Users
         public ShowForReservationDto Show { get; set; }
         public List<SeatReserved> SeatsReserved { get; set; }
         public bool IsConfirmed { get; set; }
+        public int TicketId { get; set; }
     }
 }

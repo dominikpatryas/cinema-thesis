@@ -28,6 +28,7 @@ export class MovieComponent implements OnInit {
   isReservationVisible = false;
   displayedColumns: string[] = ['Datetime of show', 'Available seats', 'Reservation'];
   reservationForm: FormGroup;
+  reducedTicketsCount = 0;
 
   constructor(private moviesService: MoviesService,
               private route: ActivatedRoute,
@@ -113,11 +114,12 @@ export class MovieComponent implements OnInit {
         userId = Number(this.authService.getDecodedToken()?.nameid);
       }
 
-      this.reservationsService.addReservation(userId, this.show.id, this.seatsToBeReserved).subscribe(res => {
+      this.reservationsService.addReservation(userId, this.show.id, this.seatsToBeReserved, this.reducedTicketsCount, this.seatsToBeReserved.length - this.reducedTicketsCount).subscribe(res => {
         this.seatsToBeReserved.forEach(seatToBeReserved => {
           this.seatsReserved.push(seatToBeReserved.seatNumber);
         });
         this.seatsToBeReserved = [];
+        this.reducedTicketsCount = 0;
 
         this.alertify.success(`Succesfully reservation for ${this.movie.title}`);
       }, (error) => {

@@ -27,8 +27,7 @@ export class AddMovieComponent implements OnInit {
       duration: [null, Validators.required],
       casts: [null, Validators.required],
       photos: [null, Validators.required],
-      types: [null, Validators.required],
-      datePlayed: [null, Validators.required]
+      types: [null, Validators.required]
     });
   }
 
@@ -39,7 +38,7 @@ export class AddMovieComponent implements OnInit {
       movie.casts = this.convertCasts(movie.casts);
       movie.photos = this.convertPhotos(movie.photos);
       movie.types = this.convertTypes(movie.types);
-      movie.trailerUrl = movie.trailerUrl.map(url => url.replace('watch?v=', 'embed/'));
+      movie.trailerUrl = movie.trailerUrl.replace('watch?v=', 'embed/');
 
       this.moviesService.addMovie(movie).subscribe(() => {
         this.alertifyService.success('Added movie successfully.');

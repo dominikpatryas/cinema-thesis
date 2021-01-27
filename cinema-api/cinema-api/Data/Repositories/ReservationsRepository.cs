@@ -15,16 +15,20 @@ namespace cinema_api.Data.Repositories
         {
             _context = context;
         }
-        public void AddReservation(Reservation reservation)
+        public async Task<int> AddReservation(Reservation reservation)
         {
-            _context.Reservations.Add(reservation);
+            await _context.Reservations.AddAsync(reservation);
+            await _context.SaveChangesAsync();
+
+            return reservation.Id;
         }
 
         public async Task DeleteReservation(int id)
         {
-            var reservation = _context.Reservations.FirstOrDefault(r => r.Id == id);
+            var reservation = await _context.Reservations.FirstOrDefaultAsync(r => r.Id == id);
 
-            _context.Remove(reservation);
+            _context.Reservations.Remove(reservation);
+
             await SaveAll();
         }
 
@@ -37,7 +41,9 @@ namespace cinema_api.Data.Repositories
 
         public async Task<IEnumerable<Reservation>> GetReservations()
         {
-            var reservations = await _context.Reservations.Include(x => x.SeatsReserved).ToListAsync();
+            var reservations = await _context.Reservations
+                .Include(x => x.SeatsReserved)
+                .ToListAsync();
 
             return reservations;
         }
@@ -65,6 +71,24 @@ namespace cinema_api.Data.Repositories
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        private async Task RemoveTemporaryUser(int reservationUserId)
+        {
+            var temporaryUser = await _context.Users.FirstOrDefaultAsync(u => u.Id == reservationUserId && u.TemporaryReservation == true);
+
+            if (temporaryUser != null)
+            {
+                _context.Users.Remove(temporaryUser);
+            }
+        }
+
+        public async Task UpdateTicketId(int ticketId, int reservationId)
+        {
+            var reservationToUpdate = await _context.Reservations.FirstOrDefaultAsync(r => r.Id == reservationId);
+            reservationToUpdate.TicketId = ticketId;
+
+            await SaveAll();
         }
     }
 }

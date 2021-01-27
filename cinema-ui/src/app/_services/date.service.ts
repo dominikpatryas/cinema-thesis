@@ -9,6 +9,6 @@ export class DateService {
 
   convertDatetoView(date: string) {
     const newDate = new Date(date);
-    return `${newDate.toLocaleDateString()} ${this.days[newDate.getDay()]}` ;
+    return `${newDate.toLocaleDateString()} ${this.days[newDate.getDay()]} ${newDate.toLocaleTimeString()}` ;
   }
 }

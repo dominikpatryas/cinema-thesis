@@ -1,0 +1,28 @@
+<div class="container">
+  <div id="contentToConvert" style="background-color: white">
+    <h1>Ticket</h1>
+    <table border="1" width="100%">
+      <tbody>
+      <tr>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Movie name</th>
+        <th>Date played</th>
+        <th>Seats reserved</th>
+        <th>Reduced tickets count</th>
+        <th>Normal tickets count</th>
+      </tr>
+      <tr>
+        <td>{{ticket.user.firstName}}</td>
+        <td>{{ticket.user.lastName}}</td>
+        <td>{{ticket.show.movie.title}}</td>
+        <td>{{ticket.show.datePlayed | date}}</td>
+        <td><ng-container *ngFor="let seat of ticket.seatsReserved">{{seat.seatNumber}} </ng-container></td>
+        <td>{{ticket.reduced}}</td>
+        <td>{{ticket.normal}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <button (click)="generatePDF()">Generate PDF</button>
+</div>

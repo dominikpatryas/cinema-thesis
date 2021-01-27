@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import {HomeComponent} from './home/home.component';
 import {FooterComponent} from './footer/footer.component';
-import {BackgroundWaveComponent} from './background-wave/background-wave.component';
 import {AboutUsComponent} from './about-us/about-us.component';
 import {RegisterComponent} from './register/register.component';
 import {NavigationComponent} from './navigation/navigation.component';
@@ -20,19 +19,20 @@ import {MatTableModule} from '@angular/material/table';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {AddShowComponent} from './adding-panel/show/add-show.component';
 import { AddHallComponent } from './adding-panel/hall/add-hall.component';
-import {AuthGuard} from './_guards/auth.guard';
+import {AdminEmployeeGuard} from './_guards/admin-employee-guard.service';
 import { AddMovieComponent } from './adding-panel/add-movie/add-movie.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { VideoComponent } from './video/video.component';
 import {SafeVideoPipe} from './_pipes/SafeVideoPipe';
 import { MyProfileComponent } from './my-profile/my-profile.component';
+import {LoggingGuard} from './_guards/LoggingGuard';
+import { TicketsComponent } from './tickets/tickets.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     FooterComponent,
-    BackgroundWaveComponent,
     AboutUsComponent,
     RegisterComponent,
     NavigationComponent,
@@ -45,7 +45,8 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
     ReservationsComponent,
     VideoComponent,
     SafeVideoPipe,
-    MyProfileComponent
+    MyProfileComponent,
+    TicketsComponent
   ],
     imports: [
         BrowserModule,
@@ -58,7 +59,8 @@ import { MyProfileComponent } from './my-profile/my-profile.component';
         FontAwesomeModule,
     ],
   providers: [
-    AuthGuard
+    AdminEmployeeGuard,
+    LoggingGuard
   ],
   bootstrap: [AppComponent]
 })

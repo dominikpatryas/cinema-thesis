@@ -1,17 +1,14 @@
 <div class="container" style="background-color: #fff">
-  <h1 class="text-center my-3">Repertuire</h1>
+  <h1 class="text-center my-3">Repertoire</h1>
   <div class="d-flex flex-wrap">
     <div *ngFor="let movie of movies" class="w-50 text-center">
-      <h2 class="card-header w-100">{{movie.title}}</h2>
+      <h2 class="card-header w-100">{{movie.title}} ({{movie?.year}})</h2>
       <div class="border">
         <a class="btn mt-3" href="/movies/{{movie.id}}">
           <img class="card-img-top pull-left rounded " src="{{movie.photos[0].url}}">
         </a>
         <p> <ng-container *ngFor="let type of movie.types">{{type.type}} </ng-container></p>
-        <p class="card-text text-left pb-5 mx-4" style="font-size: large">{{movie.description}} dsadsa asd asdsa dsa dsa
-          dasd as
-          dasd sadsadsadsa djashd jkashdjkas hdjkashd jksahd jkas hdajksdh jkashd jksahd jkhaskd haskjhdjk sahdjksha
-          jkdhs jkahjdkhas jkdhjkas s</p>
+        <p class="card-text text-left pb-5 mx-4" style="font-size: large">{{movie.description}}</p>
       </div>
     </div>
   </div>

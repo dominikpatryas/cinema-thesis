@@ -20,8 +20,4 @@ export class MyProfileComponent implements OnInit {
       this.user = user;
     });
   }
-
-  getTicket(id: number) {
-    // TODO
-  }
 }

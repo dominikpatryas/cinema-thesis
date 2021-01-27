@@ -1,1 +1,60 @@
-<p>contact works!</p>
+<div class="container-fluid contact">
+  <div class="row p-2" style="flex: 1;">
+    <div class="col-md-6 cards-wrapper">
+      <div class="contact-card">
+        <div class="contact-header">
+          <i class="fas fa-phone"></i>
+          <h2 class="contact-title">
+            Telephone
+          </h2>
+        </div>
+        <div class="contact-bottom">
+          <p>+48 123456789</p>
+          <p>+48 987654321</p>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-header">
+          <i class="fas fa-envelope"></i>
+          <h2 class="contact-title">
+            E-mail
+          </h2>
+        </div>
+        <div class="contact-bottom">
+          <p>test@gmail.com</p>
+          <p style="visibility: hidden;">+48 987654321</p>
+        </div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-header">
+          <i class="fas fa-map-marker-alt"></i>
+          <h2 class="contact-title">
+            Adres
+          </h2>
+        </div>
+        <div class="contact-bottom">
+          <p>ul. Osiedlowa 13/37</p>
+          <p>39-999 Białystok</p>
+        </div>
+      </div>
+    </div>
+    <hr class="clearfix d-md-none" style="width: 90%;">
+    <div class="col-md-6">
+      <form class="contact-form" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+        <h1 class="form-header white">Contact form</h1>
+        <div class="form-group">
+          <input type="email" class="form-control" formControlName="email" aria-describedby="emailHelp" placeholder="Type your email" (focus)="sent = false">
+          <div *ngIf="contactForm.get('email').touched && contactForm.get('email').hasError('required')">Email is required</div>
+        </div>
+        <div class="form-group">
+          <textarea type="text" class="form-control" id="inputMessage" formControlName="message" placeholder="Wiadomość" rows="5" (focus)="sent = false"></textarea>
+          <div *ngIf="contactForm.get('message').touched && contactForm.get('message').hasError('required')">Message must not be empty</div>
+        </div>
+        <ng-container *ngIf="sent">
+          <label style="color: limegreen;" class="mb-1">Sent</label><br>
+        </ng-container>
+        <button type="submit" class="btn btn-primary" [disabled]="!contactForm.valid">Send</button>
+      </form>
+    </div>
+  </div>
+</div>

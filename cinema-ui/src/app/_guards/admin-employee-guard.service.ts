@@ -4,7 +4,7 @@ import {AlertifyService} from '../_services/alertify.service';
 import {Injectable} from '@angular/core';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AdminEmployeeGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router, private alertify: AlertifyService) {}
 
   canActivate(): boolean {

@@ -36,8 +36,8 @@ namespace cinema_api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var X = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<DataContext>(x => x.UseSqlServer(X)); // appsettings.json polaczenie
+            var con = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<DataContext>(x => x.UseSqlServer(con));
             services.AddAuthorization();
             services.AddMvc();
             services.AddCors();
@@ -48,6 +48,7 @@ namespace cinema_api
             services.AddScoped<IMoviesRepository, MoviesRepository>();
             services.AddScoped<IHallsRepository, HallsRepository>();
             services.AddScoped<IShowsRepository, ShowsRepository>();
+            services.AddScoped<ITicketsRepository, TicketsRepository>();
             services.AddScoped<IAuthorizer, Authorizer>();
             services.AddScoped<IReservationsRepository, ReservationsRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

@@ -60,11 +60,14 @@
     </ng-container>
 
     <ng-container matColumnDef="Confirm">
-      <th mat-header-cell *matHeaderCellDef class="text-center"> Remove</th>
+      <th mat-header-cell *matHeaderCellDef class="text-center"> Remove/ Get Ticket</th>
       <td mat-cell *matCellDef="let element" class="text-center">
         <button class="btn-danger ml-3"
                 (click)="declineReservation(element.id)"> Remove
         </button>
+
+        <button *ngIf="element.isConfirmed" class="btn-primary ml-3" >Get ticket</button>
+
       </td>
     </ng-container>
 

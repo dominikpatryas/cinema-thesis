@@ -3,20 +3,14 @@
     <small>{{movie?.title}} {{movie?.year}} </small>
   </h1>
   <div class="movie d-flex">
-    <div class="movie-gallery">
+    <div class="movie-gallery col-md-5">
       <img src="{{movie?.photos[0].url}}">
     </div>
-    <div class="movie-description mx-3">
+    <div class="movie-description mx-3 col-md-7">
       <h2>Description</h2>
       <p>{{movie?.duration}} min</p>
-      <p class="movie-text"> <
-        {{movie?.description}} Sed mauris velit, mollis vel dictum eget, dignissim tempor massa. In tempor commodo
-        libero, ut pulvinar neque. Integer ac quam porttitor, dignissim lorem faucibus, finibus metus. Mauris quis
-        fringilla metus, ac blandit risus. Mauris at sagittis velit. Vestibulum id facilisis lorem. Nulla enim tellus,
-        vulputate non metus at, consectetur dignissim risus. Etiam dapibus vitae leo vel volutpat. Maecenas consequat
-        dapibus sagittis. Duis nec accumsan lorem, ac dictum ipsum. Nunc et dolor in mi aliquam dignissim. Curabitur
-        tellus odio, egestas eu cursus sit amet, ultricies tincidunt augue. Sed ultrices mollis nisi, non accumsan nisi
-        consequat ac. In condimentum diam a tortor dignissim, sit amet fermentum metus sollicitudin.
+      <p class="movie-text">
+        {{movie?.description}}
       </p>
       <div class="cast">
         <h2>Cast</h2>
@@ -32,7 +26,7 @@
     </div>
   </div>
 
-  <div *ngIf="movie?.trailerUrl" class="w-100">
+  <div *ngIf="movie?.trailerUrl" class="w-100 mt-2">
     <app-video class="mx-auto" [videoUrl]="movie?.trailerUrl"></app-video>
   </div>
 
@@ -84,13 +78,16 @@
       <h4>Seats choosen:
         <ng-container *ngFor="let seat of seatsToBeReserved"> {{seat}}</ng-container>
       </h4>
+      <label> Reduced tickets
+        <input type="number" class="mr-3" min="0" max="{{seatsToBeReserved.length}}" name="reducedTicketsCount" [(ngModel)]="reducedTicketsCount">
+      </label>
       <ng-container *ngIf="isReservationVisible">
         <div *ngIf="!isUserLoggedIn()" class="text-center w-50 mx-auto my-0">
         <form [formGroup]="reservationForm" (ngSubmit) = "createReservationWithoutAccount()">
           <h2 class="text-center text-primary">Create reservation without account</h2>
           <hr>
           <div class="form-group">
-          <div class="form-group" >
+          <div class="form-group">
             <input type="email" class="form-control" formControlName="email" placeholder="Email"
                    [ngClass]="{'is-invalid': reservationForm.get('email').errors
     && reservationForm.get('email').touched}"

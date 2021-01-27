@@ -76,14 +76,6 @@
          *ngIf="movieForm.get('photos').touched && movieForm.get('photos').hasError('required')">Photo url is required
     </div>
 
-      <label>Datetime played</label>
-      <input [ngClass]="{'is-invalid': movieForm.get('datePlayed').errors  && movieForm.get('datePlayed').touched}"
-             class="form-control" type="datetime-local"
-             placeholder="Datetime played" formControlName="datePlayed">
-      <div class="invalid-feedback"
-           *ngIf="movieForm.get('datePlayed').touched && movieForm.get('datePlayed').hasError('required')">Datetime played is required
-      </div>
-
     <div class="form-group text-center">
       <button class="btn btn-success" [disabled]="!movieForm.valid" type="submit">Add</button>
     </div>

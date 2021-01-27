@@ -8,6 +8,7 @@ using cinema_api.Data.Interfaces;
 using cinema_api.Dtos.Reservations;
 using cinema_api.Helpers.Interfaces;
 using cinema_api.Models;
+using cinema_api.Models.HelperModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,12 +21,14 @@ namespace cinema_api.Controllers
         private IReservationsRepository _repo;
         private readonly IMapper _mapper;
         private readonly IAuthorizer _authorizer;
+        private readonly ITicketsRepository _ticketsRepository;
 
-        public ReservationsController(IReservationsRepository repo, IMapper mapper, IAuthorizer authorizer)
+        public ReservationsController(IReservationsRepository repo, IMapper mapper, IAuthorizer authorizer, ITicketsRepository ticketsRepository)
         {
             _repo = repo;
             _mapper = mapper;
             _authorizer = authorizer;
+            _ticketsRepository = ticketsRepository;
         }
 
         [HttpPost]
@@ -38,10 +41,21 @@ namespace cinema_api.Controllers
                 seat.ShowId = reservationForAdd.ShowId;
             }
 
-            _repo.AddReservation(reservation);
+            var reservationId = await _repo.AddReservation(reservation);
+            var ticketId = await _ticketsRepository.AddTicket(new Ticket
+            {
+                Normal = reservationForAdd.NormalTickets,
+                Reduced = reservationForAdd.ReducedTickets,
+                ReservationId = reservationId,
+                SeatsReserved = reservationForAdd.SeatsReserved,
+                ShowId = reservationForAdd.ShowId,
+                UserId = reservationForAdd.UserId
+            });
+            await _repo.UpdateTicketId(ticketId, reservationId);
+
             await _repo.SaveAll();
 
-            return StatusCode(201);
+            return StatusCode(201, reservationId);
         }
 
         [HttpGet]

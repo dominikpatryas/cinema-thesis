@@ -20,8 +20,8 @@ namespace cinema_api.Helpers
         public string GetUserClaim(string token, string claimType)
         {
             var handler = new JwtSecurityTokenHandler();
-            var tokenS = handler.ReadToken(token) as JwtSecurityToken;
-            var claim = tokenS.Claims.First(claim => claim.Type == claimType).Value;
+            var readToken = handler.ReadToken(token) as JwtSecurityToken;
+            var claim = readToken.Claims.First(claim => claim.Type == claimType).Value;
 
             return claim;
         }

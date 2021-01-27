@@ -13,8 +13,8 @@ export class ReservationsService {
 
   constructor(private http: HttpClient) { }
 
-  addReservation(userId: number, showId: number, seatsReserved: SeatReserved[]) {
-    return this.http.post(this.apiUrl, {userId, showId, seatsReserved});
+  addReservation(userId: number, showId: number, seatsReserved: SeatReserved[], reducedTickets: number, normalTickets: number) {
+    return this.http.post(this.apiUrl, {userId, showId, seatsReserved, reducedTickets, normalTickets});
   }
 
   getManagementReservations(): Observable<Reservation[]> {

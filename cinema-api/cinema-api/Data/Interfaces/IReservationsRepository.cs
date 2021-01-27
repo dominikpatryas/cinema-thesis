@@ -12,7 +12,8 @@ namespace cinema_api.Data.Interfaces
         Task<IEnumerable<Reservation>> GetManagementReservations();
         Task<Reservation> GetReservation(int id);
         Task<Boolean> ConfirmReservation(int id);
-        void AddReservation(Reservation reservation);
+        Task UpdateTicketId(int ticketId, int reservationId);
+        Task<int> AddReservation(Reservation reservation);
         Task DeleteReservation(int id);
         Task<Boolean> SaveAll();
     }

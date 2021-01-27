@@ -13,7 +13,6 @@ namespace cinema_api.Dtos
         public string TrailerUrl { get; set; }
         public int Year { get; set; }
         public ICollection<MovieType> Types { get; set; }
-
         public int Duration { get; set; }
     }
 }
