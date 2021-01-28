@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using cinema_api.Data.Interfaces;
 using cinema_api.Dtos.Reservations;
+using cinema_api.Dtos.Users;
 using cinema_api.Helpers.Interfaces;
 using cinema_api.Models;
 using cinema_api.Models.HelperModels;
@@ -63,7 +64,9 @@ namespace cinema_api.Controllers
         {
             var reservations = await _repo.GetReservations();
 
-            return StatusCode(200, reservations);
+            var reservationsDto = _mapper.Map<List<ReservationsForUserReservationsListDto>>(reservations);
+
+            return StatusCode(200, reservationsDto);
         }
 
         [Authorize]

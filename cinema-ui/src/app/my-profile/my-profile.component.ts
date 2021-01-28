@@ -9,7 +9,7 @@ import {User} from '../_models/User';
   styleUrls: ['./my-profile.component.scss']
 })
 export class MyProfileComponent implements OnInit {
-  displayedColumns: string[] = ['Id', 'Show id', 'Seats reserved', 'Confirmed', 'Ticket'];
+  displayedColumns: string[] = ['Id', 'Movie title', 'Date played', 'Seats reserved', 'Confirmed', 'Ticket'];
   user: User;
 
   constructor(private authService: AuthService) {

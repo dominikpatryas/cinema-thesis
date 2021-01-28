@@ -30,6 +30,8 @@ namespace cinema_api.Helpers
             CreateMap<ShowForReservationDto, Show>();
             CreateMap<UserForReservationDto, ReservationForReservationDto>();
             CreateMap<MovieForUpdateDto, Movie>();
+            CreateMap<Reservation, ReservationsForUserReservationsListDto>();
+            CreateMap<List<ReservationsForUserReservationsListDto>, Reservation>();
         }
     }
 }

@@ -8,10 +8,16 @@ import {AlertifyService} from '../_services/alertify.service';
   styleUrls: ['./reservations.component.scss']
 })
 export class ReservationsComponent implements OnInit {
-  managementReservations: any[];
   confirmedReservations: any[];
   reservations: any[];
-  displayedColumns: string[] = ['User id', 'Show id', 'Seats reserved', 'Confirm'];
+  displayedColumns: string[] = [
+    'Email',
+    'First name',
+    'Last name',
+    'Date played',
+    'Seats reserved',
+    'Confirm'
+  ];
 
   constructor(private reservationsService: ReservationsService, private alertifyService: AlertifyService) {
   }

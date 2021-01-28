@@ -43,6 +43,8 @@ namespace cinema_api.Data.Repositories
         {
             var reservations = await _context.Reservations
                 .Include(x => x.SeatsReserved)
+                .Include(x => x.Show)
+                .Include(x => x.User)
                 .ToListAsync();
 
             return reservations;

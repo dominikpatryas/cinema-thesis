@@ -14,9 +14,14 @@
       <td mat-cell *matCellDef="let element" class="text-center"> {{element.id }}</td>
     </ng-container>
 
-    <ng-container matColumnDef="Show id">
-      <th mat-header-cell *matHeaderCellDef class="text-center"> Show id</th>
+    <ng-container matColumnDef="Movie title">
+      <th mat-header-cell *matHeaderCellDef class="text-center"> Movie Title</th>
       <td mat-cell *matCellDef="let element" class="text-center"> {{element.show.movie.title }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="Date played">
+      <th mat-header-cell *matHeaderCellDef class="text-center"> Date Played</th>
+      <td mat-cell *matCellDef="let element" class="text-center"> {{element.show.datePlayed | date }}</td>
     </ng-container>
 
     <ng-container matColumnDef="Seats reserved">
