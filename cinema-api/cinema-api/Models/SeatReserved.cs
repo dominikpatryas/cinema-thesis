@@ -9,7 +9,7 @@ namespace cinema_api.Models
     {
         public int Id { get; set; }
         public int SeatNumber { get; set; }
-        public int ShowId { get; set; }
+        public int? ShowId { get; set; }
         public int ReservationId { get; set; }
     }
 }
