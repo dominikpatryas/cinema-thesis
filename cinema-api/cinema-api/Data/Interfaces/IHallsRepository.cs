@@ -13,6 +13,7 @@ namespace cinema_api.Data.Interfaces
         void AddHall(Hall hall);
         Task DeleteHall(int id);
         Boolean IsHallExisting();
+        Boolean CheckAvailability(int id, DateTime dateTime, int movieDuration);
         Task<Boolean> SaveAll();
     }
 }

@@ -42,10 +42,19 @@ export class AddShowComponent implements OnInit {
   addShow() {
     if (this.showForm.valid) {
       const show = Object.assign({}, this.showForm.value);
-      this.showsService.addShow(show).subscribe(() => {
-        this.alertifyService.success('Added show successfully.');
-      }, error => {
-        this.alertifyService.error(error);
+
+      this.hallsService.checkHallAvailability(show.hallId, show.datePlayed,
+        this.movies.find(m => m.id === +show.movieId).duration).subscribe(res => {
+
+        if (res) {
+          this.showsService.addShow(show).subscribe(() => {
+            this.alertifyService.success('Added show successfully.');
+          }, error => {
+            this.alertifyService.error(error);
+          });
+        } else {
+          this.alertifyService.warning('There is already movie played this time, try choosing other datetime.');
+        }
       });
     }
   }
@@ -57,4 +66,5 @@ export class AddShowComponent implements OnInit {
   getHalls() {
     this.hallsService.getHalls().subscribe(halls => { this.halls = halls; });
   }
+
 }

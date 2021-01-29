@@ -3,6 +3,7 @@ import {environment} from '../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Hall} from '../_models/Hall';
 import {Observable} from "rxjs";
+import {Movie} from "../_models/Movie";
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,9 @@ export class HallsService {
 
   deleteHall(id: string) {
     return this.http.delete(this.apiUrl + id);
+  }
+
+  checkHallAvailability(id, dateTime, movieDuration?: number) {
+    return this.http.post(this.apiUrl + 'availability', {id, dateTime, movieDuration}, {headers: new HttpHeaders('Authorization: Bearer ' + localStorage.getItem('token'))})
   }
 }

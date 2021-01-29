@@ -2,6 +2,7 @@
 using cinema_api.Dtos;
 using cinema_api.Models;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -48,6 +49,24 @@ namespace cinema_api.Data
         public bool IsHallExisting()
         {
             throw new System.NotImplementedException();
+        }
+
+        public bool CheckAvailability(int id, DateTime dateTime, int movieDuration)
+        {
+            var shows = _context.Shows.Include(m => m.Movie).Where(x => x.HallId == id).ToList();
+            var dateTimeEndOfShow = dateTime.AddMinutes(movieDuration);
+
+            foreach (var show in shows)
+            {
+                if ((show.DatePlayed <= dateTime) && (dateTime <= show.DatePlayed.AddMinutes(show.Movie.Duration) 
+                    || (show.DatePlayed <= dateTimeEndOfShow) && (dateTimeEndOfShow <= show.DatePlayed.AddMinutes(show.Movie.Duration))
+                    || (show.DatePlayed >= dateTime && show.DatePlayed.AddMinutes(show.Movie.Duration) <= dateTimeEndOfShow)))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public async Task<bool> SaveAll()
