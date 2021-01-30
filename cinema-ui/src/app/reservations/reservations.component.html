@@ -85,7 +85,7 @@
                 (click)="declineReservation(element.id)"> Remove
         </button>
 
-        <button *ngIf="element.isConfirmed" class="btn-primary ml-3" >Get ticket</button>
+        <button *ngIf="element.isConfirmed" class="btn-primary ml-3" [routerLink]="['/tickets', element.ticketId]">Get ticket</button>
 
       </td>
     </ng-container>
