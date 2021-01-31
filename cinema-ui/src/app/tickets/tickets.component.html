@@ -1,7 +1,7 @@
 <div class="container">
   <div id="contentToConvert" style="background-color: white">
-    <h1>Ticket</h1>
-    <table border="1" width="100%">
+    <h1 class="text-center">Ticket</h1>
+    <table border="1" width="100%" style="font-size: 18px">
       <tbody>
       <tr>
         <th>First name</th>
@@ -11,6 +11,7 @@
         <th>Seats reserved</th>
         <th>Reduced tickets count</th>
         <th>Normal tickets count</th>
+        <th>Cost</th>
       </tr>
       <tr>
         <td>{{ticket.user.firstName}}</td>
@@ -20,9 +21,10 @@
         <td><ng-container *ngFor="let seat of ticket.seatsReserved">{{seat.seatNumber}} </ng-container></td>
         <td>{{ticket.reduced}}</td>
         <td>{{ticket.normal}}</td>
+        <td><b>{{ticket.normal * 8 + ticket.reduced * 6}}$</b></td>
       </tr>
       </tbody>
     </table>
   </div>
-  <button (click)="generatePDF()">Generate PDF</button>
+  <button class="mt-4" (click)="generatePDF()">Generate PDF</button>
 </div>
