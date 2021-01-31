@@ -6,6 +6,7 @@ using AutoMapper;
 using cinema_api.Data.Interfaces;
 using cinema_api.Dtos;
 using cinema_api.Helpers.Interfaces;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,11 +30,16 @@ namespace cinema_api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetTicket(int id)
         {
-            if (!_authorizer.IsAdminOrEmployee(User))
-                return Unauthorized();
+            var token = await HttpContext.GetTokenAsync("access_token");
+            var userId = _authorizer.GetUserClaim(token, "nameid");
 
-            var ticket = await _repo.GetTicket(id);
+            var ticket = await _repo.GetTicket(id, Int32.Parse(userId));
             var ticketForReservation = _mapper.Map<TicketForGenerateDto>(ticket);
+
+            if (ticketForReservation == null)
+            {
+                return Unauthorized();
+            }
 
             return StatusCode(200, ticketForReservation);
         }

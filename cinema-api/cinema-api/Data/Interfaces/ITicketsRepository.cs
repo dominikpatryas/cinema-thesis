@@ -8,7 +8,7 @@ namespace cinema_api.Data.Interfaces
 {
     public interface ITicketsRepository
     {
-        Task<Ticket> GetTicket(int id);
+        Task<Ticket> GetTicket(int id, int userId);
         Task<int> AddTicket(Ticket ticket);
         void DeleteTicket(int id);
         Task<Boolean> SaveAll();

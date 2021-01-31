@@ -31,9 +31,10 @@ namespace cinema_api.Data.Repositories
             _context.Remove(ticket);
         }
 
-        public async Task<Ticket> GetTicket(int id)
+        public async Task<Ticket> GetTicket(int id, int userId)
         {
             var ticket = await _context.Tickets
+                .Where(u => u.UserId == userId)
                 .Include(x => x.SeatsReserved)
                 .Include(z => z.Show.Hall)
                 .Include(z => z.Show.Movie)
