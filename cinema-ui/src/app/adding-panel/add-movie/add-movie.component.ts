@@ -25,9 +25,9 @@ export class AddMovieComponent implements OnInit {
       trailerUrl: ['', Validators.required],
       year: [null, Validators.required],
       duration: [null, Validators.required],
-      casts: [null, Validators.required],
-      photos: [null, Validators.required],
-      types: [null, Validators.required]
+      casts: ['', Validators.required],
+      photos: ['', Validators.required],
+      types: ['', Validators.required]
     });
   }
 

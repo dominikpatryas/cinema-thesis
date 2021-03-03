@@ -114,16 +114,17 @@ export class MovieComponent implements OnInit {
         userId = Number(this.authService.getDecodedToken()?.nameid);
       }
 
-      this.reservationsService.addReservation(userId, this.show.id, this.seatsToBeReserved, this.reducedTicketsCount, this.seatsToBeReserved.length - this.reducedTicketsCount).subscribe(res => {
+      this.reservationsService.addReservation(userId, this.show.id, this.seatsToBeReserved, this.reducedTicketsCount,
+        this.seatsToBeReserved.length - this.reducedTicketsCount).subscribe(res => {
         this.seatsToBeReserved.forEach(seatToBeReserved => {
           this.seatsReserved.push(seatToBeReserved.seatNumber);
         });
+
         this.seatsToBeReserved = [];
         this.reducedTicketsCount = 0;
 
         this.alertify.success(`Succesfully reservation for ${this.movie.title}`);
       }, (error) => {
-        console.log(error);
         this.alertify.error(`Failed reservation for ${this.movie.title}`);
       });
     }
