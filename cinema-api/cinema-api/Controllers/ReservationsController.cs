@@ -53,7 +53,6 @@ namespace cinema_api.Controllers
                 UserId = reservationForAdd.UserId
             });
             await _repo.UpdateTicketId(ticketId, reservationId);
-
             await _repo.SaveAll();
 
             return StatusCode(201, reservationId);

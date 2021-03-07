@@ -14,20 +14,6 @@ namespace cinema_api.Data
         {
             _context = context;
         }
-
-        public void AddMovie(Movie movie)
-        {
-            _context.Movies.Add(movie);
-        }
-
-        public async Task DeleteMovie(int id)
-        {
-            var movie = _context.Movies.FirstOrDefault(m => m.Id == id);
-
-            _context.Remove(movie);
-            await SaveAll();
-        }
-
         public async Task<Movie> GetMovie(int id)
         {
             var movie = await _context.Movies
@@ -53,6 +39,19 @@ namespace cinema_api.Data
         public bool IsMovieExisting(string name)
         {
              return _context.Movies.Any(x => x.Title == name);
+        }
+
+        public void AddMovie(Movie movie)
+        {
+            _context.Movies.Add(movie);
+        }
+
+        public async Task DeleteMovie(int id)
+        {
+            var movie = _context.Movies.FirstOrDefault(m => m.Id == id);
+
+            _context.Remove(movie);
+            await SaveAll();
         }
 
         public async Task<bool> SaveAll()

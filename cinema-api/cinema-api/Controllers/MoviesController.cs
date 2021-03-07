@@ -48,7 +48,7 @@ namespace cinema_api.Controllers
             return StatusCode(201);
         }
 
-        [HttpGet("")]
+        [HttpGet]
         public async Task<IActionResult> GetMovies()
         {
             var movies = await _repo.GetMovies();

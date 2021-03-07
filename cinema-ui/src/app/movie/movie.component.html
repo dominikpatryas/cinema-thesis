@@ -79,7 +79,11 @@
         <ng-container *ngFor="let seat of seatsToBeReserved"> {{seat}}</ng-container>
       </h4>
       <label> Reduced tickets
-        <input type="number" class="mr-3" min="0" max="{{seatsToBeReserved.length}}" name="reducedTicketsCount" [(ngModel)]="reducedTicketsCount">
+        <input type="number"
+               class="mr-3"
+               min="0" max="{{seatsToBeReserved.length}}"
+               name="reducedTicketsCount"
+               [(ngModel)]="reducedTicketsCount">
       </label>
       <ng-container *ngIf="isReservationVisible">
         <div *ngIf="!isUserLoggedIn()" class="text-center w-50 mx-auto my-0">
